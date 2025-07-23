@@ -1,0 +1,7 @@
+test:
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password: test # passoedをここに記入
+  host: 127.0.0.1
+  database: Herotchi_CMS2_Ruby_test #database名をここに記入
