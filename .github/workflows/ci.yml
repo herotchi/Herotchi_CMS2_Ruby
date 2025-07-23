@@ -89,10 +89,13 @@ jobs:
       - name: Make bin scripts executable
         run: chmod +x bin/*
 
+      - name: Set up database.yml for CI
+        run: cp config/database.yml.ci config/database.yml
+
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://127.0.0.1:3306
+          #DATABASE_URL: mysql2://127.0.0.1:3306
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test test:system
 
