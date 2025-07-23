@@ -1,7 +1,9 @@
 test:
   adapter: mysql2
   encoding: utf8
+  collation: utf8_general_ci
+  pool: 5
   username: root
-  password: test # passoedをここに記入
+  password:
   host: 127.0.0.1
-  database: Herotchi_CMS2_Ruby_test #database名をここに記入
+  database: Herotchi_CMS2_Ruby_test
