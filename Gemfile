@@ -63,3 +63,6 @@ gem "dotenv-rails"
 group :development do
   gem "letter_opener_web"
 end
+
+gem "dartsass-rails"
+gem "bootstrap", "~> 5.3.3"
