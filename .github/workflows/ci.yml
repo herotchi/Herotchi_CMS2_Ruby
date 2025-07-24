@@ -36,6 +36,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Make importmap script executable
+        run: chmod +x bin/importmap
+
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
 
