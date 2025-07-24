@@ -59,3 +59,7 @@ group :test do
 end
 
 gem "dotenv-rails"
+
+group :development do
+  gem "letter_opener_web"
+end
