@@ -68,3 +68,6 @@ gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
 
 gem "devise"
+
+gem 'rails-i18n'
+gem 'devise-i18n'
