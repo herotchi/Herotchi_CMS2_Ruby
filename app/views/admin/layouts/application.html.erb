@@ -25,19 +25,16 @@
 
 <body>
     <header>
-        <% if user_signed_in? %>
+        <% if admin_manager_signed_in? %>
         <li>
-            <%= link_to "アカウント情報更新", edit_user_registration_path %>
+            <%= link_to "アカウント情報更新", edit_admin_manager_registration_path %>
         </li>
         <li>
-            <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= button_to "ログアウト", destroy_admin_manager_session_path, method: :delete %>
         </li>
         <% else %>
         <li>
-            <%= link_to "新規登録", new_user_registration_path %>
-        </li>
-        <li>
-            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "ログイン", new_admin_manager_session_path %>
         </li>
         <% end %>
     </header>

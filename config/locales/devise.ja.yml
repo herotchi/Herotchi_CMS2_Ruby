@@ -1,6 +1,12 @@
 ja:
   activerecord:
     attributes:
+      manager:
+        login_id: ログインID
+        email: Eメール
+        password: パスワード
+        password_confirmation: パスワード（確認用）
+        current_password: 現在のパスワード
       user:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
@@ -28,6 +34,7 @@ ja:
         updated_at: 更新日
     models:
       user: ユーザー
+      manager: 管理者ユーザー
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
