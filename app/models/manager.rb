@@ -4,7 +4,7 @@ class Manager < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
   devise :database_authenticatable, :registerable,
-         :validatable, :authentication_keys: [ :login_id ]
+         :validatable, authentication_keys: [ :login_id ]
 
   validates :login_id,
     presence: true,
