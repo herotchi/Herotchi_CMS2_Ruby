@@ -21,14 +21,37 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app %>
     <%= javascript_importmap_tags %>
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .no-header {
+            width: 100%;
+            max-width: 480px;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
 </head>
 
-<body>
-    <%= render "layouts/navigation" %>
+<body class="bg-body-tertiary h-100">
+
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container">
+        <main>
+            <div class="no-header">
+                <div class="text-center">
+                    <%= image_tag("logo.png", alt: "Herotchi_CMS2_Ruby", class: "my-4", width: "57", height: "57") %>
+                </div>
+                <%= yield %>
+            </div>
+        </main>
+        <x-toasts />
+    </div>
 </body>
 
 </html>
