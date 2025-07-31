@@ -1,25 +1,38 @@
-<h2>Change your password</h2>
-
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+<%#= render "users/shared/error_messages", resource: resource %>
+<%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+<div class="row g-3 card mt-3 pt-2 pb-4 px-4 shadow">
+    <div class="col-12">
+        <%= f.label :password, class: "form-label" do %>新しいパスワード
+        <span class="text-danger fw-bold">※</span>
+        <% end %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+        <% end %>
+        <%= f.password_field :password, class: "form-control#{' is-invalid' if f.object.errors[:password].any?}", autofocus: true, autocomplete: "new-password" %>
+        <% if f.object.errors[:password].any? %>
+        <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password).first %></div>
+        <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="col-12">
+        <%= f.label :password_confirmation, class: "form-label" do %>新しいパスワード（確認用）
+        <span class="text-danger fw-bold">※</span>
+        <% end %>
+        <%= f.password_field :password_confirmation, class: "form-control#{' is-invalid' if f.object.errors[:password_confirmation].any?}", autocomplete: "new-password" %>
+        <% if f.object.errors[:password_confirmation].any? %>
+        <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password_confirmation).first %></div>
+        <% end %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
+    <div class="col-12">
+        <%= f.submit "パスワードを変更する", class: "btn btn-primary w-100" %>
+    </div>
+
+</div>
+
+
 <% end %>
 
-<%= render "users/shared/links" %>
+<%#= render "users/shared/links" %>

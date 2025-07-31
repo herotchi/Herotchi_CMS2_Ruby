@@ -1,16 +1,27 @@
-<h2>Resend confirmation instructions</h2>
-
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<%#= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
-  </div>
+<div class="row g-3 card mt-3 pt-2 pb-4 px-4 shadow">
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
+    <div class="text-secondary">
+        ご登録ありがとうございます。入力いただいたメールアドレス宛に確認メールを送信しました。メールをご確認いただき、メールに記載されたURLをクリックして登録を完了してください。メールが届いていない場合、メールを再送できます。
+    </div>
 
-<%= render "users/shared/links" %>
+    <div class="col-12">
+        <%= f.label :email, class: "form-label" do %>メールアドレス
+        <span class="text-danger fw-bold">※</span>
+        <% end %>
+        <%= f.email_field :email, class: "form-control#{' is-invalid' if f.object.errors[:email].any?}", autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+        <% if f.object.errors[:email].any? %>
+        <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:email).first %></div>
+        <% end %>
+    </div>
+
+    <div class="col-12">
+        <%= f.submit "確認メールを再送する", class: "btn btn-primary w-100" %>
+    </div>
+    <% end %>
+
+    <%#= render "users/shared/links" %>
+
+</div>

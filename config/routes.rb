@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   get "top/index"
   root "top#index"
   devise_for :users, controllers: {
-    registrations: "users/registrations"
+    registrations: "users/registrations",
+    passwords: "users/passwords",
+    sessions: "users/sessions",
+    confirmations: "users/confirmations"
   }
 
   namespace :admin do
