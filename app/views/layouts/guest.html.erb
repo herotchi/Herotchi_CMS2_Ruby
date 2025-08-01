@@ -37,10 +37,6 @@
 </head>
 
 <body class="bg-body-tertiary h-100">
-
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div class="container">
         <main>
             <div class="no-header">
@@ -50,7 +46,7 @@
                 <%= yield %>
             </div>
         </main>
-        <x-toasts />
+        <%= render "layouts/toasts" %>
     </div>
 </body>
 
