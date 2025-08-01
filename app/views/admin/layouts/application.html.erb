@@ -25,9 +25,8 @@
 
 <body>
     <%= render "admin/layouts/navigation" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
+    <%= render "admin/layouts/toasts" %>
 </body>
 
 </html>
