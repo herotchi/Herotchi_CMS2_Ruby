@@ -2,7 +2,7 @@
 
 class Admin::Managers::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  layout "admin/layouts/application"
+  layout "admin/layouts/guest"
 
   # GET /resource/sign_in
   # def new

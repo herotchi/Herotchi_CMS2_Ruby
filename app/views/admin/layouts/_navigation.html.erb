@@ -1,0 +1,14 @@
+<header>
+    <% if admin_manager_signed_in? %>
+    <li>
+        <%= link_to "アカウント情報更新", edit_admin_manager_registration_path %>
+    </li>
+    <li>
+        <%= button_to "ログアウト", destroy_admin_manager_session_path, method: :delete %>
+    </li>
+    <% else %>
+    <li>
+        <%= link_to "ログイン", new_admin_manager_session_path %>
+    </li>
+    <% end %>
+</header>
