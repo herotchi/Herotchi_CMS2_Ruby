@@ -399,6 +399,7 @@ GEM
     thruster (0.1.14-arm64-darwin)
     thruster (0.1.14-x86_64-darwin)
     thruster (0.1.14-x86_64-linux)
+    timeliness (0.5.3)
     timeout (0.4.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -407,6 +408,9 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     useragent (0.16.11)
+    validates_timeliness (8.0.0)
+      activemodel (>= 8.0.0, < 9)
+      timeliness (>= 0.3.10, < 1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -461,6 +465,7 @@ DEPENDENCIES
   solid_queue
   thruster
   tzinfo-data
+  validates_timeliness (~> 8.0)
   web-console
 
 BUNDLED WITH

@@ -8,7 +8,7 @@
         <%= f.label :email, class: "form-label" do %>メールアドレス
         <span class="text-danger fw-bold">※</span>
         <% end %>
-        <%= f.email_field :email, class: "form-control#{' is-invalid' if f.object.errors[:email].any?}", autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:email].any?}", autofocus: true, autocomplete: "email" %>
         <% if f.object.errors[:email].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:email).first %></div>
         <% end %>
@@ -18,7 +18,7 @@
         <%= f.label :name, class: "form-label" do %>ユーザー名
         <span class="text-danger fw-bold">※</span>
         <% end %>
-        <%= f.text_field :name, class: "form-control#{' is-invalid' if f.object.errors[:name].any?}", autocomplete: "name" %>
+        <%= f.text_field :name, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:name].any?}", autocomplete: "name" %>
         <% if f.object.errors[:name].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:name).first %></div>
         <% end %>
@@ -31,7 +31,7 @@
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
-        <%= f.password_field :password, class: "form-control#{' is-invalid' if f.object.errors[:password].any?}", autocomplete: "new-password" %>
+        <%= f.password_field :password, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:password].any?}", autocomplete: "new-password" %>
         <% if f.object.errors[:password].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password).first %></div>
         <% end %>
@@ -41,7 +41,7 @@
         <%= f.label :password_confirmation, class: "form-label" do %>パスワード（確認用）
         <span class="text-danger fw-bold">※</span>
         <% end %>
-        <%= f.password_field :password_confirmation, class: "form-control#{' is-invalid' if f.object.errors[:password_confirmation].any?}", autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:password_confirmation].any?}", autocomplete: "new-password" %>
         <% if f.object.errors[:password_confirmation].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password_confirmation).first %></div>
         <% end %>
@@ -50,7 +50,7 @@
     <% if devise_mapping.rememberable? %>
     <div class="col-12">
         <div class="form-check">
-            <%= f.check_box :user_policy, class: "form-check-input shadow-sm text-center#{' is-invalid' if f.object.errors[:user_policy].any?}" %>
+            <%= f.check_box :user_policy, class: "shadow-sm form-check-input text-center#{' is-invalid' if f.object.errors[:user_policy].any?}" %>
             <%= f.label :user_policy, class: "form-check-label" do %>
             <span class="text-info text-decoration-underline">利用規約</span>に同意する
             <% end %>

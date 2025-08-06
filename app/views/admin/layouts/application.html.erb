@@ -23,10 +23,14 @@
     <%= javascript_importmap_tags %>
 </head>
 
-<body>
+<body class="bg-body-tertiary h-100">
     <%= render "admin/layouts/navigation" %>
-    <%= yield %>
-    <%= render "admin/layouts/toasts" %>
+    <div class="container">
+        <main>
+            <%= yield %>
+        </main>
+        <%= render "admin/layouts/toasts" %>
+    </div>
 </body>
 
 </html>

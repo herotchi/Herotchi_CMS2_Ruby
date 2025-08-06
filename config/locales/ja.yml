@@ -182,3 +182,11 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  flash:
+    actions:
+      create:
+        success: "%{resource}を保存しました。"
+      update:
+        success: "%{resource}を更新しました。"
+      destroy:
+        success: "%{resource}を削除しました。"

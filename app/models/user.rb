@@ -14,8 +14,9 @@ class User < ApplicationRecord
     acceptance: { on: :create},
     unless: :devise_password_reset?
 
+  private
 
-    def devise_password_reset?
-      reset_password_token.present?
-    end
+  def devise_password_reset?
+    reset_password_token.present?
+  end
 end

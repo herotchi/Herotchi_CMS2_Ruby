@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "News" %>
+
+<h1>News</h1>
+
+<div id="news">
+  <% @news.each do |news| %>
+    <%= render news %>
+    <p>
+      <%= link_to "Show this news", [:admin, news] %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New news", new_admin_news_path %>

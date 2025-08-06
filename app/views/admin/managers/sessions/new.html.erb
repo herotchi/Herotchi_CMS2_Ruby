@@ -7,7 +7,7 @@
         <%= f.label :login_id, class: "form-label" do %>ログインID
         <span class="text-danger fw-bold">※</span>
         <% end %>
-        <%= f.text_field :login_id, class: "form-control#{' is-invalid' if f.object.errors[:login_id].any?}", autofocus: true, autocomplete: "login_id" %>
+        <%= f.text_field :login_id, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:login_id].any?}", autofocus: true, autocomplete: "login_id" %>
         <% if f.object.errors[:login_id].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:login_id).first %></div>
         <% end %>
@@ -17,7 +17,7 @@
         <%= f.label :password, class: "form-label" do %>パスワード
         <span class="text-danger fw-bold">※</span>
         <% end %>
-        <%= f.password_field :password, class: "form-control#{' is-invalid' if f.object.errors[:password].any?}", autocomplete: "current-password" %>
+        <%= f.password_field :password, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:password].any?}", autocomplete: "current-password" %>
         <% if f.object.errors[:password].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password).first %></div>
         <% end %>
@@ -26,7 +26,7 @@
     <% if devise_mapping.rememberable? %>
     <div class="col-12">
         <div class="form-check">
-            <%= f.check_box :remember_me, class: "form-check-input shadow-sm#{' is-invalid' if f.object.errors[:remember_me].any?}" %>
+            <%= f.check_box :remember_me, class: "shadow-sm form-check-input#{' is-invalid' if f.object.errors[:remember_me].any?}" %>
             <%= f.label :remember_me, class: "form-check-label" %>
             <% if f.object.errors[:remember_me].any? %>
             <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:remember_me).first %></div>
@@ -36,7 +36,7 @@
     <% end %>
 
     <div class="col-12">
-        <%= f.submit "ログイン", class: "btn btn-primary w-100" %>
+        <%= f.submit "ログイン", class: "btn btn-primary w-100 mt-4" %>
     </div>
 </div>
 
