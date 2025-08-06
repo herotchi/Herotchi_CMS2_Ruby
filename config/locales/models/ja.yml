@@ -1,7 +1,15 @@
 ja:
   activerecord:
-    model:
+    models:
+      news: お知らせ
       tag: タグ
     attributes:
+      news:
+        title: タイトル
+        link_flg: リンク設定
+        url: URL
+        overview: 概要
+        release_date: 公開日
+        release_flg: 表示設定
       tag:
         name: タグ名

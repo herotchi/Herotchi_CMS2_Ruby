@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         sessions:       "admin/managers/sessions",
         registrations:  "admin/managers/registrations"
     }
+    resources :news
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

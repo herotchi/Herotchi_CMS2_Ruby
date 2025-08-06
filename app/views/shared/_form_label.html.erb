@@ -1,0 +1,8 @@
+<% if required %>
+<%= form.label attribute, class: "form-label" do %>
+<%= label %>
+<span class="text-danger fw-bold">※</span>
+<% end %>
+<% else %>
+<%= form.label attribute, label, class: "form-label" %>
+<% end %>

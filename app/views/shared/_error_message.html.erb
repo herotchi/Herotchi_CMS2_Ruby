@@ -1,0 +1,3 @@
+<% if form.object.errors[attribute].any? %>
+<div class="invalid-feedback"><%= form.object.errors.full_messages_for(attribute).first %></div>
+<% end %>

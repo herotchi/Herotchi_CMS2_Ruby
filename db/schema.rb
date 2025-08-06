@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_26_063322) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_06_060127) do
   create_table "managers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -19,6 +19,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_26_063322) do
     t.string "login_id", limit: 20, default: "", null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["login_id"], name: "index_managers_on_login_id", unique: true
+  end
+
+  create_table "news", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", limit: 100, default: "", null: false
+    t.integer "link_flg", default: 2, null: false
+    t.string "url"
+    t.text "overview"
+    t.date "release_date", null: false
+    t.integer "release_flg", default: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

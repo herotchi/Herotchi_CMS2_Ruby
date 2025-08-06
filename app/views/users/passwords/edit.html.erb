@@ -11,7 +11,7 @@
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em><br />
         <% end %>
-        <%= f.password_field :password, class: "form-control#{' is-invalid' if f.object.errors[:password].any?}", autofocus: true, autocomplete: "new-password" %>
+        <%= f.password_field :password, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:password].any?}", autofocus: true, autocomplete: "new-password" %>
         <% if f.object.errors[:password].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password).first %></div>
         <% end %>
@@ -21,7 +21,7 @@
         <%= f.label :password_confirmation, class: "form-label" do %>新しいパスワード（確認用）
         <span class="text-danger fw-bold">※</span>
         <% end %>
-        <%= f.password_field :password_confirmation, class: "form-control#{' is-invalid' if f.object.errors[:password_confirmation].any?}", autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, class: "shadow-sm form-control#{' is-invalid' if f.object.errors[:password_confirmation].any?}", autocomplete: "new-password" %>
         <% if f.object.errors[:password_confirmation].any? %>
         <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:password_confirmation).first %></div>
         <% end %>

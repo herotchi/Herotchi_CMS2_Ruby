@@ -1,0 +1,50 @@
+<%= form_with(model: [:admin, news]) do |form| %>
+<div class="card-header">お知らせ登録</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :link_flg, label: "タイトル", required: true %>
+            <%= form.text_field :title, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:title].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :title %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :link_flg, label: "リンク設定", required: true %>
+        <%= render 'shared/radio_button_group', form: form, attribute: :link_flg, collection: NewsConstants::LINK_FLG_LIST %>
+        <%= render 'shared/error_message', form: form, attribute: :link_flg %>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :url, label: "URL", required: false %>
+            <%= form.text_field :url, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:url].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :url %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :overview, label: "概要", required: false %>
+            <%= form.text_area :overview, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:overview].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :overview %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :release_date, label: "公開日", required: true %>
+            <%= form.date_field :release_date, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:release_date].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :release_date %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :release_flg, label: "表示設定", required: true %>
+        <%= render 'shared/radio_button_group', form: form, attribute: :release_flg, collection: NewsConstants::RELEASE_FLG_LIST %>
+        <%= render 'shared/error_message', form: form, attribute: :release_flg %>
+
+    </div>
+</div>
+
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "保存", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+
+<% end %>
