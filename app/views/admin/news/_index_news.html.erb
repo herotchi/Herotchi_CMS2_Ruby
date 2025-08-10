@@ -1,0 +1,14 @@
+<tr>
+    <td scope="rol">
+        <%= link_to news.title, [:admin, news] %>
+    </td>
+    <td>
+        <%= news.release_date.strftime('%Y/%m/%d') %>
+    </td>
+    <td>
+        <%= NewsConstants::LINK_FLG_LIST[news.link_flg] %>
+    </td>
+    <td>
+        <%= NewsConstants::RELEASE_FLG_LIST[news.release_flg] %>
+    </td>
+</tr>

@@ -1,32 +1,47 @@
+<tr>
+    <td scope="rol">
+        <%= link_to news.title, [:admin, news] %>
+    </td>
+    <td>
+        <%= NewsConstants::LINK_FLG_LIST[news.link_flg] %>
+    </td>
+    <td>
+        <%= news.release_date %>
+    </td>
+    <td>
+        <%= NewsConstants::RELEASE_FLG_LIST[news.release_flg] %>
+    </td>
+</tr>
+
 <div id="<%= dom_id news %>">
-  <p>
-    <strong>Title:</strong>
-    <%= news.title %>
-  </p>
+    <p>
+        <strong>Title:</strong>
+        <%= news.title %>
+    </p>
 
-  <p>
-    <strong>Link flg:</strong>
-    <%= news.link_flg %>
-  </p>
+    <p>
+        <strong>Link flg:</strong>
+        <%= news.link_flg %>
+    </p>
 
-  <p>
-    <strong>Url:</strong>
-    <%= news.url %>
-  </p>
+    <p>
+        <strong>Url:</strong>
+        <%= news.url %>
+    </p>
 
-  <p>
-    <strong>Overview:</strong>
-    <%= news.overview %>
-  </p>
+    <p>
+        <strong>Overview:</strong>
+        <%= news.overview %>
+    </p>
 
-  <p>
-    <strong>Release date:</strong>
-    <%= news.release_date %>
-  </p>
+    <p>
+        <strong>Release date:</strong>
+        <%= news.release_date %>
+    </p>
 
-  <p>
-    <strong>Release flg:</strong>
-    <%= news.release_flg %>
-  </p>
+    <p>
+        <strong>Release flg:</strong>
+        <%= news.release_flg %>
+    </p>
 
 </div>

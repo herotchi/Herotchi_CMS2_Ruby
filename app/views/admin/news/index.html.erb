@@ -1,16 +1,40 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "News" %>
+<% content_for :title, "お知らせ一覧" %>
 
-<h1>News</h1>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">お知らせ一覧</li>
+    </ol>
+</nav>
 
-<div id="news">
-  <% @news.each do |news| %>
-    <%= render news %>
-    <p>
-      <%= link_to "Show this news", [:admin, news] %>
-    </p>
-  <% end %>
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
 </div>
 
-<%= link_to "New news", new_admin_news_path %>
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">タイトル</th>
+                    <th>公開日</th>
+                    <th>リンク設定</th>
+                    <th>表示設定</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @news.each do |news| %>
+                <%= render "index_news", news: news %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <%= paginate @news, theme: "bootstrap-5" %>
+    </div>
+</div>

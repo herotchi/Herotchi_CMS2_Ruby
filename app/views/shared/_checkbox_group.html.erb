@@ -1,0 +1,7 @@
+<div class="btn-group mt-0 shadow-sm">
+    <% collection.each do |value, label| %>
+    <%= form.check_box attribute,{ id: "#{attribute}_#{value}", class: "btn-check", multiple: true }, value, nil  %>
+    <%= form.label attribute, label, class: "btn btn-outline-success form-control#{' is-invalid' if form.object.respond_to?(:errors) && form.object.errors[attribute].any?}", for: "#{attribute}_#{value}" %>
+    <% end %>
+</div>
+<div class="<%= "mt-0#{' is-invalid' if form.object.respond_to?(:errors) && form.object.errors[attribute].any?}" %>"></div>
