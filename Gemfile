@@ -73,3 +73,8 @@ gem "rails-i18n"
 gem "devise-i18n"
 
 gem "validates_timeliness", "~> 8.0"
+
+gem "ransack"
+
+gem "kaminari"
+gem "bootstrap5-kaminari-views"

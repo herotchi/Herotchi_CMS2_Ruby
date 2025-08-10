@@ -19,5 +19,6 @@ module NewsConstants
     RELEASE_FLG_ON => '表示',
     RELEASE_FLG_OFF => '非表示'
   }.freeze
-    
+
+  ADMIN_PAGENATE_LIST_LIMIT = 2;
 end

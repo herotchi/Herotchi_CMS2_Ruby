@@ -25,4 +25,14 @@ class News < ApplicationRecord
     presence: true,
     length: { maximum: NewsConstants::OVERVIEW_LENGTH_MAX, allow_blank: true },
     if: -> { link_flg == NewsConstants::LINK_FLG_OFF && errors[:link_flg].blank? }
+
+  def self.ransackable_attributes(auth_object = nil)
+     %w[title link_flg release_date release_flg]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+     []
+  end
+
+
 end

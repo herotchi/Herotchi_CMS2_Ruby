@@ -1,0 +1,48 @@
+<% if total_pages > 1 %>
+<%= paginator.render do %>
+<nav class="d-flex justify-items-center justify-content-center">
+
+    <div class="d-flex justify-content-center flex-fill d-sm-none">
+        <ul class="pagination my-2">
+            <%= prev_page_tag unless current_page.first? %>
+            <%= next_page_tag unless current_page.last? %>
+        </ul>
+    </div>
+
+    <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-center">
+        <div>
+            <ul class="pagination my-2">
+                <%= first_page_tag unless current_page.first? %>
+                <%= prev_page_tag unless current_page.first? %>
+                <% each_page do |page| %>
+                <% if page.left_outer? || page.right_outer? || page.inside_window? %>
+                <%= page_tag page %>
+                <% elsif !page.was_truncated? -%>
+                <%= gap_tag %>
+                <% end %>
+                <% end %>
+                <%= next_page_tag unless current_page.last? %>
+                <%= last_page_tag unless current_page.last? %>
+            </ul>
+        </div>
+    </div>
+</nav>
+<% end %>
+<% else %>
+<nav class="d-flex justify-items-center justify-content-center">
+    <div class="d-flex justify-content-center flex-fill d-sm-none">
+        <ul class="pagination my-2">
+            <li class="page-item disabled" aria-disabled="true">
+                <span class="page-link"><%= current_page %></span>
+            </li>
+        </ul>
+    </div>
+    <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-center">
+        <div>
+            <ul class="pagination my-2">
+                <li class="page-item disabled" aria-current="page"><span class="page-link"><%= current_page %></span></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<% end %>

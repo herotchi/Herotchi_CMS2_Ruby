@@ -3,7 +3,9 @@ class Admin::NewsController < Admin::ApplicationController
 
   # GET /admin/news or /admin/news.json
   def index
-    @news = News.all
+    # @news = News.all
+    @q = News.ransack(params[:q])
+    @news = @q.result.page(params[:page]).per(NewsConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /admin/news/1 or /admin/news/1.json

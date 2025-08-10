@@ -4,7 +4,7 @@
     <div class="row g-3">
 
         <div class="col-md-12">
-            <%= render 'shared/form_label', form: form, attribute: :link_flg, label: "タイトル", required: true %>
+            <%= render 'shared/form_label', form: form, attribute: :title, label: "タイトル", required: true %>
             <%= form.text_field :title, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:title].any?}" %>
             <%= render 'shared/error_message', form: form, attribute: :title %>
         </div>
