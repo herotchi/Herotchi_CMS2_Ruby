@@ -1,0 +1,48 @@
+<% if collection.total_count == 0 %>
+<nav class="d-flex justify-items-center justify-content-center">
+    <div class="flex-fill d-flex align-items-center justify-content-end">
+        <div>
+            <p class="small text-muted my-1">
+                <span class="fw-semibold">0件</span>
+            </p>
+        </div>
+    </div>
+</nav>
+<% elsif collection.total_count == 1 %>
+<nav class="d-flex justify-items-center justify-content-center">
+    <div class="flex-fill d-flex align-items-center justify-content-end">
+        <div>
+            <p class="small text-muted my-1">
+                <span class="fw-semibold">1件中</span>
+                <span class="fw-semibold">1件目</span>
+            </p>
+        </div>
+    </div>
+</nav>
+<% elsif collection.total_pages > 1 %>
+<nav class="d-flex justify-items-center justify-content-center">
+    <div class="flex-fill d-flex align-items-center justify-content-end">
+        <div>
+            <p class="small text-muted my-1">
+                <span class="fw-semibold"><%= collection.total_count %>件中</span>
+                <% if collection.total_count == collection.offset_value + 1 %>
+                <span class="fw-semibold"><%= collection.offset_value + 1 %>件目</span>
+                <% else %>
+                <span class="fw-semibold"><%= collection.offset_value + 1 %>～<%= [collection.offset_value + collection.limit_value, collection.total_count].min %>件目</span>
+                <% end %>
+            </p>
+        </div>
+    </div>
+</nav>
+<% else %>
+<nav class="d-flex justify-items-center justify-content-center">
+    <div class="flex-fill d-flex align-items-center justify-content-end">
+        <div>
+            <p class="small text-muted my-1">
+                <span class="fw-semibold"><%= collection.total_count %>件中</span>
+                <span class="fw-semibold"><%= collection.offset_value + 1 %>～<%= [collection.offset_value + collection.limit_value, collection.total_count].min %>件目</span>
+            </p>
+        </div>
+    </div>
+</nav>
+<% end %>
