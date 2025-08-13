@@ -1,47 +1,42 @@
-<tr>
-    <td scope="rol">
-        <%= link_to news.title, [:admin, news] %>
-    </td>
-    <td>
-        <%= NewsConstants::LINK_FLG_LIST[news.link_flg] %>
-    </td>
-    <td>
-        <%= news.release_date %>
-    </td>
-    <td>
-        <%= NewsConstants::RELEASE_FLG_LIST[news.release_flg] %>
-    </td>
-</tr>
-
-<div id="<%= dom_id news %>">
-    <p>
-        <strong>Title:</strong>
-        <%= news.title %>
-    </p>
-
-    <p>
-        <strong>Link flg:</strong>
-        <%= news.link_flg %>
-    </p>
-
-    <p>
-        <strong>Url:</strong>
-        <%= news.url %>
-    </p>
-
-    <p>
-        <strong>Overview:</strong>
-        <%= news.overview %>
-    </p>
-
-    <p>
-        <strong>Release date:</strong>
-        <%= news.release_date %>
-    </p>
-
-    <p>
-        <strong>Release flg:</strong>
-        <%= news.release_flg %>
-    </p>
-
+<div class="card-header">お知らせ詳細</div>
+<div class="card-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <h5>タイトル</h5>
+            <span><%= @news.title %></span>
+        </li>
+        <li class="list-group-item">
+            <h5>リンク設定</h5>
+            <span><%= NewsConstants::LINK_FLG_LIST[@news.link_flg] %></span>
+        </li>
+        <% if @news.link_flg == NewsConstants::LINK_FLG_ON %>
+        <li class="list-group-item">
+            <h5>URL</h5>
+            <span><%= @news.url %></span>
+        </li>
+        <% else %>
+        <li class="list-group-item">
+            <h5>概要</h5>
+            <span><%= @news.overview %></span>
+        </li>
+        <% end %>
+        <li class="list-group-item">
+            <h5>公開日</h5>
+            <span><%= @news.release_date %></span>
+        </li>
+        <li class="list-group-item">
+            <h5>表示設定</h5>
+            <span><%= NewsConstants::RELEASE_FLG_LIST[@news.release_flg] %></span>
+        </li>
+    </ul>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= link_to "編集", edit_admin_news_path(@news), class: "btn btn-primary w-50", role: "button" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger float-end" data-bs-toggle="modal" data-bs-target="#destroyModal">削除</button>
+        </div>
+    </div>
 </div>

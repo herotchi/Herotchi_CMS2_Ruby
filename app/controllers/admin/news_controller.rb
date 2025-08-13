@@ -54,7 +54,7 @@ class Admin::NewsController < Admin::ApplicationController
     @news.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_news_index_path, status: :see_other, notice: "News was successfully destroyed." }
+      format.html { redirect_to admin_news_index_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: News.model_name.human) }
       format.json { head :no_content }
     end
   end
