@@ -17,7 +17,7 @@
         <% else %>
         <li class="list-group-item">
             <h5>概要</h5>
-            <span><%= @news.overview %></span>
+            <span><%= simple_format(h(@news.overview)) %></span>
         </li>
         <% end %>
         <li class="list-group-item">
