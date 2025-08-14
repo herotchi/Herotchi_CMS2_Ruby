@@ -40,7 +40,7 @@ class Admin::NewsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to [:admin, @news], notice: "News was successfully updated." }
+        format.html { redirect_to [:admin, @news], notice: t("flash.actions.update.success", resource: News.model_name.human) }
         format.json { render :show, status: :ok, location: @news }
       else
         format.html { render :edit, status: :unprocessable_entity }

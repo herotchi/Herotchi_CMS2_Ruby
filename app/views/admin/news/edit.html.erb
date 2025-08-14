@@ -1,12 +1,13 @@
-<% content_for :title, "Editing news" %>
+<% content_for :title, "お知らせ編集" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "お知らせ一覧", admin_news_index_path %></li>
+        <li class="breadcrumb-item"><%= link_to "お知らせ詳細", admin_news_path(@news) %></li>
+        <li class="breadcrumb-item active" aria-current="page">お知らせ編集</li>
+    </ol>
+</nav>
 
-<h1>Editing news</h1>
-
-<%= render "form", news: @news %>
-
-<br>
-
-<div>
-  <%= link_to "Show this news", [:admin, @news] %> |
-  <%= link_to "Back to news", admin_news_index_path %>
+<div class="card shadow mb-4">
+    <%= render "form", news: @news %>
 </div>
