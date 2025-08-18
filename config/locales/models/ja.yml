@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       news: お知らせ
+      first_category: 大カテゴリ
       tag: タグ
     attributes:
       news:
@@ -11,5 +12,7 @@ ja:
         overview: 概要
         release_date: 公開日
         release_flg: 表示設定
+      first_category:
+        name: 大カテゴリ名
       tag:
         name: タグ名

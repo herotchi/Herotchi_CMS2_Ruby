@@ -1,0 +1,12 @@
+<% content_for :title, "Editing first category" %>
+
+<h1>Editing first category</h1>
+
+<%= render "form", first_category: @first_category %>
+
+<br>
+
+<div>
+  <%= link_to "Show this first category", [:admin, @first_category] %> |
+  <%= link_to "Back to first categories", admin_first_categories_path %>
+</div>

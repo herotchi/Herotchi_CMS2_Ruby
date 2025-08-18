@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         registrations:  "admin/managers/registrations"
     }
     resources :news
+    resources :first_categories
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
