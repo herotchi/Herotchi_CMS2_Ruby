@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "First categories" %>
+
+<h1>First categories</h1>
+
+<div id="first_categories">
+  <% @first_categories.each do |first_category| %>
+    <%= render first_category %>
+    <p>
+      <%= link_to "Show this first category", [:admin, first_category] %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New first category", new_admin_first_category_path %>

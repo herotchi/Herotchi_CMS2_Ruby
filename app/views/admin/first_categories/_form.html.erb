@@ -1,0 +1,23 @@
+<%= form_with(model: [:admin, first_category]) do |form| %>
+<div class="card-header">お知らせ登録</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "大カテゴリ名", required: true %>
+            <%= form.text_field :name, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:name].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :name %>
+        </div>
+
+    </div>
+</div>
+
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "保存", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>
