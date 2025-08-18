@@ -3,7 +3,9 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
 
   # GET /admin/first_categories or /admin/first_categories.json
   def index
-    @first_categories = FirstCategory.all
+    # @first_categories = FirstCategory.all
+    @q = FirstCategory.ransack(params[:q])
+    @first_categories = @q.result.page(params[:page]).per(FirstCategoryConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /admin/first_categories/1 or /admin/first_categories/1.json
