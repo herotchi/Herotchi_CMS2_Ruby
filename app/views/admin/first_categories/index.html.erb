@@ -1,16 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "大カテゴリ一覧" %>
 
-<% content_for :title, "First categories" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">大カテゴリ一覧</li>
+    </ol>
+</nav>
 
-<h1>First categories</h1>
-
-<div id="first_categories">
-  <% @first_categories.each do |first_category| %>
-    <%= render first_category %>
-    <p>
-      <%= link_to "Show this first category", [:admin, first_category] %>
-    </p>
-  <% end %>
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
 </div>
 
-<%= link_to "New first category", new_admin_first_category_path %>
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+        <%= render 'kaminari/bootstrap-5/number', collection: @first_categories %>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">大カテゴリ名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @first_categories.each do |first_category| %>
+                <%= render "index_first_category", first_category: first_category %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <%= paginate @first_categories, theme: "bootstrap-5" %>
+    </div>
+</div>
