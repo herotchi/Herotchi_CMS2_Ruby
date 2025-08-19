@@ -1,7 +1,19 @@
-<div id="<%= dom_id first_category %>">
-  <p>
-    <strong>Name:</strong>
-    <%= first_category.name %>
-  </p>
-
+<div class="card-header">大カテゴリ詳細</div>
+<div class="card-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <h5>タイトル</h5>
+            <span><%= first_category.name %></span>
+        </li>
+    </ul>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= link_to "編集", edit_admin_first_category_path(first_category), class: "btn btn-primary w-50", role: "button" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger float-end" data-bs-toggle="modal" data-bs-target="#destroyModal">削除</button>
+        </div>
+    </div>
 </div>
