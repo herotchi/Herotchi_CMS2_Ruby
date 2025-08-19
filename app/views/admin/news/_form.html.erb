@@ -1,5 +1,11 @@
 <%= form_with(model: [:admin, news]) do |form| %>
-<div class="card-header">お知らせ登録</div>
+<div class="card-header">
+    <% if news.new_record? %>
+    お知らせ登録
+    <% else %>
+    お知らせ編集
+    <% end %>
+</div>
 <div class="card-body">
     <div class="row g-3">
 

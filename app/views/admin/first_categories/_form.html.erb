@@ -1,5 +1,11 @@
 <%= form_with(model: [:admin, first_category]) do |form| %>
-<div class="card-header">お知らせ登録</div>
+<div class="card-header">
+    <% if first_category.new_record? %>
+    大カテゴリ登録
+    <% else %>
+    大カテゴリ編集
+    <% end %>
+</div>
 <div class="card-body">
     <div class="row g-3">
 
