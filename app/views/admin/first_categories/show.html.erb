@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "大カテゴリ詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "大カテゴリ一覧", admin_first_categories_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">大カテゴリ詳細</li>
+    </ol>
+</nav>
 
-<%= render @first_category %>
-
-<div>
-  <%= link_to "Edit this first category", edit_admin_first_category_path(@first_category) %> |
-  <%= link_to "Back to first categories", admin_first_categories_path %>
-
-  <%= button_to "Destroy this first category", [:admin, @first_category], method: :delete %>
+<div class="card shadow mb-4">
+    <%= render @first_category %>
 </div>
+<%= render "shared/destroy_modal", title: "大カテゴリ", path: admin_first_category_path(@first_category) %>
