@@ -1,12 +1,13 @@
-<% content_for :title, "Editing first category" %>
+<% content_for :title, "大カテゴリ編集" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "大カテゴリ一覧", admin_first_categories_path %></li>
+        <li class="breadcrumb-item"><%= link_to "大カテゴリ詳細", admin_first_category_path(@first_category) %></li>
+        <li class="breadcrumb-item active" aria-current="page">大カテゴリ編集</li>
+    </ol>
+</nav>
 
-<h1>Editing first category</h1>
-
-<%= render "form", first_category: @first_category %>
-
-<br>
-
-<div>
-  <%= link_to "Show this first category", [:admin, @first_category] %> |
-  <%= link_to "Back to first categories", admin_first_categories_path %>
+<div class="card shadow mb-4">
+    <%= render "form", first_category: @first_category %>
 </div>

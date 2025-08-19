@@ -40,7 +40,7 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @first_category.update(first_category_params)
-        format.html { redirect_to [:admin, @first_category], notice: "First category was successfully updated." }
+        format.html { redirect_to [:admin, @first_category], notice: t("flash.actions.update.success", resource: FirstCategory.model_name.human) }
         format.json { render :show, status: :ok, location: @first_category }
       else
         format.html { render :edit, status: :unprocessable_entity }
