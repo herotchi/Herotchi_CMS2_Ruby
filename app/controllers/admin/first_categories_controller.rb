@@ -54,7 +54,7 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
     @first_category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_first_categories_path, status: :see_other, notice: "First category was successfully destroyed." }
+      format.html { redirect_to admin_first_categories_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: FirstCategory.model_name.human) }
       format.json { head :no_content }
     end
   end
