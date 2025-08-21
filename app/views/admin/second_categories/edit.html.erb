@@ -1,12 +1,13 @@
-<% content_for :title, "Editing second category" %>
+<% content_for :title, "中カテゴリ編集" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "中カテゴリ一覧", admin_second_categories_path %></li>
+        <li class="breadcrumb-item"><%= link_to "中カテゴリ詳細", admin_second_category_path(@second_category) %></li>
+        <li class="breadcrumb-item active" aria-current="page">中カテゴリ編集</li>
+    </ol>
+</nav>
 
-<h1>Editing second category</h1>
-
-<%= render "form", second_category: @second_category %>
-
-<br>
-
-<div>
-  <%= link_to "Show this second category", [:admin, @second_category] %> |
-  <%= link_to "Back to second categories", admin_second_categories_path %>
+<div class="card shadow mb-4">
+    <%= render "form", second_category: @second_category %>
 </div>
