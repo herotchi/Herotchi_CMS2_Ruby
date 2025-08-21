@@ -3,7 +3,9 @@ class Admin::SecondCategoriesController < Admin::ApplicationController
 
   # GET /admin/second_categories or /admin/second_categories.json
   def index
-    @second_categories = SecondCategory.all
+    # @second_categories = SecondCategory.all
+    @q = SecondCategory.ransack(params[:q])
+    @second_categories = @q.result(distinct: true).includes(:first_category).page(params[:page]).per(SecondCategoryConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /admin/second_categories/1 or /admin/second_categories/1.json
