@@ -1,0 +1,27 @@
+<%= search_form_for @q, url: admin_second_categories_path, method: :get do |form| %>
+
+<div class="card-header">中カテゴリ一覧</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :first_category_id, label: "大カテゴリ名" %>
+            <%= form.collection_select :first_category_id_eq, FirstCategory.order(:id), :id, :name, { prompt: "---" }, { class: "form-select" } %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "中カテゴリ名" %>
+            <%= form.text_field :name_cont, class: "shadow-sm form-control" %>
+        </div>
+
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "検索", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>

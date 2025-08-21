@@ -1,16 +1,36 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "中カテゴリ一覧" %>
 
-<% content_for :title, "Second categories" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">中カテゴリ一覧</li>
+    </ol>
+</nav>
 
-<h1>Second categories</h1>
-
-<div id="second_categories">
-  <% @second_categories.each do |second_category| %>
-    <%= render second_category %>
-    <p>
-      <%= link_to "Show this second category", [:admin, second_category] %>
-    </p>
-  <% end %>
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
 </div>
 
-<%= link_to "New second category", new_admin_second_category_path %>
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+        <%= render 'kaminari/bootstrap-5/number', collection: @second_categories %>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">大カテゴリ名</th>
+                    <th>中カテゴリ名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @second_categories.each do |second_category| %>
+                <%= render "index_second_category", second_category: second_category %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <%= paginate @second_categories, theme: "bootstrap-5" %>
+    </div>
+</div>

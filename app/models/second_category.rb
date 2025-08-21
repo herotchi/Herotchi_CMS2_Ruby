@@ -6,4 +6,12 @@ class SecondCategory < ApplicationRecord
   validates :name, 
     presence: true,
     uniqueness: { scope: :first_category_id, allow_blank: true }
+
+  def self.ransackable_attributes(auth_object = nil)
+     %w[first_category_id name]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+     []
+  end
 end
