@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Second categories" %>
+
+<h1>Second categories</h1>
+
+<div id="second_categories">
+  <% @second_categories.each do |second_category| %>
+    <%= render second_category %>
+    <p>
+      <%= link_to "Show this second category", [:admin, second_category] %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New second category", new_admin_second_category_path %>

@@ -3,6 +3,7 @@ ja:
     models:
       news: お知らせ
       first_category: 大カテゴリ
+      second_category: 中カテゴリ
       tag: タグ
     attributes:
       news:
@@ -14,5 +15,9 @@ ja:
         release_flg: 表示設定
       first_category:
         name: 大カテゴリ名
+      second_category:
+        first_category_id: 大カテゴリ名
+        first_category: 大カテゴリ名
+        name: 中カテゴリ名
       tag:
         name: タグ名
