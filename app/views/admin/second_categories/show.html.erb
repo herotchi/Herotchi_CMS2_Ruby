@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "中カテゴリ詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "中カテゴリ一覧", admin_second_categories_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">中カテゴリ詳細</li>
+    </ol>
+</nav>
 
-<%= render @second_category %>
-
-<div>
-  <%= link_to "Edit this second category", edit_admin_second_category_path(@second_category) %> |
-  <%= link_to "Back to second categories", admin_second_categories_path %>
-
-  <%= button_to "Destroy this second category", [:admin, @second_category], method: :delete %>
+<div class="card shadow mb-4">
+    <%= render @second_category %>
 </div>
+<%= render "shared/destroy_modal", title: "中カテゴリ", path: admin_second_category_path(@second_category) %>
