@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_14_070611) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_022637) do
   create_table "first_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 50, default: "", null: false
     t.datetime "created_at", null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_070611) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "second_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "first_category_id", null: false
+    t.string "name", limit: 50, default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["first_category_id", "name"], name: "index_second_categories_on_first_category_id_and_name", unique: true
+    t.index ["first_category_id"], name: "index_second_categories_on_first_category_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -57,4 +66,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_070611) do
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "second_categories", "first_categories"
 end

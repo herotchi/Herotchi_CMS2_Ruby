@@ -1,0 +1,11 @@
+<% content_for :title, "中カテゴリ登録" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">中カテゴリ登録</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= render "form", second_category: @second_category, first_categories: @first_categories %>
+</div>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @second_category %>
+
+<div>
+  <%= link_to "Edit this second category", edit_admin_second_category_path(@second_category) %> |
+  <%= link_to "Back to second categories", admin_second_categories_path %>
+
+  <%= button_to "Destroy this second category", [:admin, @second_category], method: :delete %>
+</div>
