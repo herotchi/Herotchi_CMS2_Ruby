@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "タグ詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "タグ一覧", admin_tags_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">タグ詳細</li>
+    </ol>
+</nav>
 
-<%= render @tag %>
-
-<div>
-  <%= link_to "Edit this tag", edit_admin_tag_path(@tag) %> |
-  <%= link_to "Back to tags", admin_tags_path %>
-
-  <%= button_to "Destroy this tag", [:admin, @tag], method: :delete %>
+<div class="card shadow mb-4">
+    <%= render @tag %>
 </div>
+<%= render "shared/destroy_modal", title: "タグ", path: admin_tag_path(@tag) %>

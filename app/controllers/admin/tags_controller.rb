@@ -4,7 +4,7 @@ class Admin::TagsController < Admin::ApplicationController
   # GET /admin/tags or /admin/tags.json
   def index
     # @tags = Tag.all
-    @q = FirstCategory.ransack(params[:q])
+    @q = Tag.ransack(params[:q])
     @tags = @q.result.page(params[:page]).per(TagConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
@@ -54,7 +54,7 @@ class Admin::TagsController < Admin::ApplicationController
     @tag.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_tags_path, status: :see_other, notice: "Tag was successfully destroyed." }
+      format.html { redirect_to admin_tags_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: Tag.model_name.human) }
       format.json { head :no_content }
     end
   end
