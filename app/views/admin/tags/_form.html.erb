@@ -24,7 +24,7 @@
 <div class="card-body">
     <div class="row g-3">
         <div class="col-md-12">
-            <%= render 'shared/form_label', form: form, attribute: :name, label: "タグ", required: true %>
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "タグ名", required: true %>
             <%= form.text_field :name, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:name].any?}" %>
             <%= render 'shared/error_message', form: form, attribute: :name %>
         </div>
