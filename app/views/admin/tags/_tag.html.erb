@@ -1,7 +1,19 @@
-<div id="<%= dom_id tag %>">
-  <p>
-    <strong>Name:</strong>
-    <%= tag.name %>
-  </p>
-
+<div class="card-header">タグ詳細</div>
+<div class="card-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <h5>タグ名</h5>
+            <span><%= tag.name %></span>
+        </li>
+    </ul>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= link_to "編集", edit_admin_tag_path(tag), class: "btn btn-primary w-50", role: "button" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger float-end" data-bs-toggle="modal" data-bs-target="#destroyModal">削除</button>
+        </div>
+    </div>
 </div>
