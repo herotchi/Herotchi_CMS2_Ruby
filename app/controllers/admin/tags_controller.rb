@@ -3,7 +3,9 @@ class Admin::TagsController < Admin::ApplicationController
 
   # GET /admin/tags or /admin/tags.json
   def index
-    @tags = Tag.all
+    # @tags = Tag.all
+    @q = FirstCategory.ransack(params[:q])
+    @tags = @q.result.page(params[:page]).per(TagConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /admin/tags/1 or /admin/tags/1.json
