@@ -40,7 +40,7 @@ class Admin::TagsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to [:admin, @tag], notice: "Tag was successfully updated." }
+        format.html { redirect_to [:admin, @tag], notice: t("flash.actions.update.success", resource: Tag.model_name.human) }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit, status: :unprocessable_entity }

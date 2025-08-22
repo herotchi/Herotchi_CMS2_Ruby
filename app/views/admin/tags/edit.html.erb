@@ -1,12 +1,13 @@
-<% content_for :title, "Editing tag" %>
+<% content_for :title, "タグ編集" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "タグ一覧", admin_tags_path %></li>
+        <li class="breadcrumb-item"><%= link_to "タグ詳細", admin_tag_path(@tag) %></li>
+        <li class="breadcrumb-item active" aria-current="page">タグ編集</li>
+    </ol>
+</nav>
 
-<h1>Editing tag</h1>
-
-<%= render "form", tag: @tag %>
-
-<br>
-
-<div>
-  <%= link_to "Show this tag", [:admin, @tag] %> |
-  <%= link_to "Back to tags", admin_tags_path %>
+<div class="card shadow mb-4">
+    <%= render "form", tag: @tag %>
 </div>
