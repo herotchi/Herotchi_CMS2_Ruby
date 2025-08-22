@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_022637) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_22_021212) do
   create_table "first_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 50, default: "", null: false
     t.datetime "created_at", null: false
@@ -46,6 +46,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_022637) do
     t.datetime "updated_at", null: false
     t.index ["first_category_id", "name"], name: "index_second_categories_on_first_category_id_and_name", unique: true
     t.index ["first_category_id"], name: "index_second_categories_on_first_category_id"
+  end
+
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", limit: 50, default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

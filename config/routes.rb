@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :news
     resources :first_categories
     resources :second_categories
+    resources :tags
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

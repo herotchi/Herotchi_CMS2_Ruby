@@ -1,0 +1,42 @@
+<%= form_with(model: [:admin, tag]) do |form| %>
+<%
+=begin %>
+<% if tag.errors.any? %>
+<div style="color: red">
+    <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+    <ul>
+        <% tag.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<% 
+=end %>
+<div class="card-header">
+    <% if tag.new_record? %>
+    タグ登録
+    <% else %>
+    タグ編集
+    <% end %>
+</div>
+<div class="card-body">
+    <div class="row g-3">
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "タグ", required: true %>
+            <%= form.text_field :name, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:name].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :name %>
+        </div>
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "保存", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+
+<% end %>
