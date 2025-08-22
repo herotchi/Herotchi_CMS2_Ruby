@@ -1,0 +1,22 @@
+<%= search_form_for @q, url: admin_tags_path, method: :get do |form| %>
+
+<div class="card-header">タグ一覧</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "タグ名" %>
+            <%= form.text_field :name_cont, class: "shadow-sm form-control" %>
+        </div>
+
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "検索", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>

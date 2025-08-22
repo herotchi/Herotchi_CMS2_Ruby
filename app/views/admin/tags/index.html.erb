@@ -1,16 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "タグ一覧" %>
 
-<% content_for :title, "Tags" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">タグ一覧</li>
+    </ol>
+</nav>
 
-<h1>Tags</h1>
-
-<div id="tags">
-  <% @tags.each do |tag| %>
-    <%= render tag %>
-    <p>
-      <%= link_to "Show this tag", [:admin, tag] %>
-    </p>
-  <% end %>
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
 </div>
 
-<%= link_to "New tag", new_admin_tag_path %>
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+        <%= render 'kaminari/bootstrap-5/number', collection: @tags %>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">タグ名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @tags.each do |tag| %>
+                <%= render "index_tag", tag: tag %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <%= paginate @tags, theme: "bootstrap-5" %>
+    </div>
+</div>
