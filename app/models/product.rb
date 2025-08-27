@@ -8,7 +8,6 @@ class Product < ApplicationRecord
     presence: true
   validates :second_category_id,
     presence: true
-  validate :second_category_must_belong_to_first_category
   validates :tag_ids,
     presence: true
   validates :tags,
@@ -17,20 +16,12 @@ class Product < ApplicationRecord
     presence: true,
     length: { maximum: ProductConstants::NAME_LENGTH_MAX, allow_blank: true }
   validates :image,
-    presence: true
+    attached: true,
+    content_type: [ "image/png", "image/jpeg" ],
+    size: { less_than_or_equal_to: ProductConstants::IMAGE_FILE_MAX.megabytes }
   validates :detail,
     presence: true,
     length: { maximum: ProductConstants::DETAIL_LENGTH_MAX, allow_blank: true }
   validates :release_flg,
     inclusion: { in: ProductConstants::RELEASE_FLG_LIST.keys, allow_blank: true }
-
-  private
-
-  def second_category_must_belong_to_first_category
-    return if first_category_id.blank? || second_category_id.blank?
-
-    if second_category.first_category_id != first_category_id
-      errors.add(:second_category_id, "は選択した第一カテゴリに属していません")
-    end
-  end
 end

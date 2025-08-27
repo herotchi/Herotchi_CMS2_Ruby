@@ -29,6 +29,7 @@ class Admin::ProductsController < Admin::ApplicationController
         format.html { redirect_to [ :admin, @product ], notice: t("flash.actions.create.success", resource: Product.model_name.human) }
         format.json { render :show, status: :created, location: @product }
       else
+        @second_categories = SecondCategory.all
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -42,6 +43,7 @@ class Admin::ProductsController < Admin::ApplicationController
         format.html { redirect_to [ :admin, @product ], notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
+        @second_categories = SecondCategory.all
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
@@ -66,6 +68,23 @@ class Admin::ProductsController < Admin::ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.expect(product: [ :first_category_id, :second_category_id, :name, :image, :detail, :release_flg, tag_ids: [] ])
+      permitted = params.expect(product: [ :first_category_id, :second_category_id, :name, :image, :detail, :release_flg, tag_ids: [] ])
+      if permitted[:tag_ids].present?
+        # 存在するタグIDだけ残す
+        valid_ids = Tag.where(id: permitted[:tag_ids]).pluck(:id)
+        permitted[:tag_ids] = valid_ids
+      end
+
+      if permitted[:first_category_id].present? && permitted[:second_category_id].present?
+        exists = SecondCategory.exists?(
+          id: permitted[:second_category_id],
+          first_category_id: permitted[:first_category_id]
+        )
+        unless exists
+          # 組み合わせが存在しなければエラーを追加
+          permitted[:second_category_id] = nil # 保存されないようにする
+        end
+      end
+      permitted
     end
 end
