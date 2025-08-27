@@ -1,3 +1,18 @@
-<% if form.object.errors[attribute].any? %>
-<div class="invalid-feedback"><%= form.object.errors.full_messages_for(attribute).first %></div>
+<% if attribute.is_a?(Array) %>
+    <% # 配列の場合、各要素のエラーをチェック %>
+    <% attribute.each do |attr_name| %>
+        <% if form.object.errors[attr_name].any? %>
+        <div class="invalid-feedback">
+            <%= form.object.errors.full_messages_for(attr_name).first %>
+        </div>
+        <% break %> <%# 最初のエラーだけ表示 %>
+        <% end %>
+    <% end %>
+<% else %>
+    <% # 文字列またはシンボルの場合 %>
+    <% if form.object.errors[attribute].any? %>
+    <div class="invalid-feedback">
+        <%= form.object.errors.full_messages_for(attribute).first %>
+    </div>
+    <% end %>
 <% end %>

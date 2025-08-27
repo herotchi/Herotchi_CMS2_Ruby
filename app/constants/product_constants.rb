@@ -1,0 +1,15 @@
+module ProductConstants
+  NAME_LENGTH_MAX = 50
+  IMAGE_FILE_MAX = 5
+  DETAIL_LENGTH_MAX = 2000
+
+  RELEASE_FLG_LIMIT = 1
+  RELEASE_FLG_ON = 1
+  RELEASE_FLG_OFF = 2
+  RELEASE_FLG_LIST = {
+    RELEASE_FLG_ON => "表示",
+    RELEASE_FLG_OFF => "非表示"
+  }.freeze
+
+  ADMIN_PAGENATE_LIST_LIMIT = 2
+end
