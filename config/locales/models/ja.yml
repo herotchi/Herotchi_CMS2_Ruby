@@ -5,6 +5,7 @@ ja:
       first_category: 大カテゴリ
       second_category: 中カテゴリ
       tag: タグ
+      product: 製品情報
     attributes:
       news:
         title: タイトル
@@ -21,3 +22,13 @@ ja:
         name: 中カテゴリ名
       tag:
         name: タグ名
+      product:
+        first_category: 大カテゴリ名
+        first_category_id: 大カテゴリ名
+        second_category: 中カテゴリ名
+        second_category_id: 中カテゴリ名
+        tag_ids: タグ名
+        name: 製品名
+        image: 製品画像
+        detail: 製品詳細
+        release_flg: 表示設定

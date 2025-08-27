@@ -1,0 +1,179 @@
+<%= form_with(model: [:admin, product]) do |form| %>
+<% 
+=begin %>
+<% if product.errors.any? %>
+<div style="color: red">
+    <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+    <ul>
+        <% product.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<%
+=end %>
+<div class="card-header">
+    <% if product.new_record? %>
+    製品情報登録
+    <% else %>
+    製品情報編集
+    <% end %>
+</div>
+
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :first_category_id, label: "大カテゴリ名", required: true %>
+            <%= form.collection_select :first_category_id, FirstCategory.order(:id), :id, :name, { prompt: "---" }, { class: "form-select#{' is-invalid' if form.object.errors[:first_category].any? || form.object.errors[:first_category_id].any?}" } %>
+            <%= render 'shared/error_message', form: form, attribute: [ :first_category, :first_category_id ] %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :second_category_id, label: "中カテゴリ名", required: true %>
+            <%= form.collection_select :second_category_id, [], :id, :name, { prompt: "---" }, { class: "form-select#{' is-invalid' if form.object.errors[:second_category].any? || form.object.errors[:second_category_id].any?}" } %>
+            <%= render 'shared/error_message', form: form, attribute: [ :second_category, :second_category_id ] %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :tag_id, label: "タグ", required: true %><br />
+            <%= form.collection_check_boxes :tag_ids, Tag.order(:id), :id, :name do |cb| %>
+            <div class="form-check form-check-inline">
+                <%= cb.check_box(class: "shadow-sm form-check-input#{' is-invalid' if form.object.errors[:tag_ids].any?}") %>
+                <%= cb.label(class: "form-check-label") %>
+            </div>
+            <% end %>
+            <div class="mt-0<%= ' is-invalid' if form.object.errors[:tag_ids].any? %>"></div>
+            <%= render 'shared/error_message', form: form, attribute: :tag_ids %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "製品名", required: true %>
+            <%= form.text_field :name, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:name].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :name %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :detail, label: "製品画像", required: true %>
+            <%= image_tag @product.image if @product.image.attached? %>
+            <%= form.file_field :image, class: "form-control#{' is-invalid' if form.object.errors[:image].any?}" %>
+            <div class="invalid-feedback"><%= form.object.errors.full_messages_for(:image).first %></div>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :detail, label: "製品詳細", required: true %>
+            <%= form.text_area :detail, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:detail].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :detail %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :release_flg, label: "表示設定", required: true %>
+        <%= render 'shared/radio_button_group', form: form, attribute: :release_flg, collection: NewsConstants::RELEASE_FLG_LIST %>
+        <%= render 'shared/error_message', form: form, attribute: :release_flg %>
+
+    </div>
+</div>
+
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "保存", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+
+<% end %>
+<script>
+    const firstSelect = document.getElementById('product_first_category_id');
+    const secondSelect = document.getElementById('product_second_category_id');
+
+    // const secondCategories = {
+    //     {
+    //         Js::from(@second_categories)
+    //     }
+    // };
+    const secondCategories = <%= raw((@second_categories || []).to_json) %>;
+    console.log(secondCategories);
+    const optionsByFirst = {};
+
+    // 大カテゴリごとに紐づいている中カテゴリの配列を作成
+    secondCategories.forEach(secondCategory => {
+        if (!optionsByFirst[secondCategory.first_category_id]) {
+            optionsByFirst[secondCategory.first_category_id] = [];
+        }
+
+        optionsByFirst[secondCategory.first_category_id].push({
+            value: secondCategory.id,
+            text: secondCategory.name
+        });
+    });
+
+    // 入力エラー等で画面が表示されたときに選択されていた大カテゴリと中カテゴリを再現する
+    document.addEventListener('DOMContentLoaded', function() {
+        const firstOption = firstSelect.value;
+
+        // 大カテゴリが選択されている場合
+        if (firstOption) {
+            const secondOptions = optionsByFirst[firstOption] || [];
+
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+
+            secondOptions.forEach(item => {
+                const newOption = document.createElement('option');
+                newOption.value = item.value;
+                newOption.text = item.text;
+                if ("<%= params[ :second_category_id ].to_s %>" === item.value) {
+                    newOption.setAttribute('selected', 'selected');
+                }
+                secondSelect.appendChild(newOption);
+            });
+        } else {
+            // 大カテゴリが選択されていない、もしくは入力エラーがあった場合
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+        }
+    });
+
+    // 大カテゴリが選択された場合、それに紐づいた中カテゴリのプルダウンを用意する
+    firstSelect.addEventListener('change', function() {
+        const firstOption = firstSelect.value;
+
+        // 存在する大カテゴリが選択された場合
+        if (firstOption) {
+            const secondOptions = optionsByFirst[firstOption] || [];
+
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+
+            secondOptions.forEach(item => {
+                const newOption = document.createElement('option');
+                newOption.value = item.value;
+                newOption.text = item.text;
+                secondSelect.appendChild(newOption);
+            });
+        } else {
+            // 空の大カテゴリが選択された場合
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+        }
+    });
+</script>

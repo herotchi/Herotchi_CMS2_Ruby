@@ -1,5 +1,6 @@
 class SecondCategory < ApplicationRecord
   belongs_to :first_category
+  has_many :products
 
   validates :first_category_id,
     presence: true

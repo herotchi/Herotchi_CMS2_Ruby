@@ -1,5 +1,6 @@
 class FirstCategory < ApplicationRecord
   has_many :second_categories, dependent: :restrict_with_error
+  has_many :products
 
   validates :name,
     presence: true,
