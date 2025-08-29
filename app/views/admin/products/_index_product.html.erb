@@ -1,0 +1,14 @@
+<tr>
+    <td scope="rol">
+        <%= product.first_category.name %>
+    </td>
+    <td>
+        <%= product.second_category.name %>
+    </td>
+    <td>
+        <%= link_to product.name, [:admin, product] %>
+    </td>
+    <td>
+        <%= ProductConstants::RELEASE_FLG_LIST[product.release_flg] %>
+    </td>
+</tr>

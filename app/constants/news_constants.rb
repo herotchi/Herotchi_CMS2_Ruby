@@ -7,20 +7,20 @@ module NewsConstants
   LINK_FLG_OFF = 2
 
   LINK_FLG_LIST = {
-    LINK_FLG_ON  => 'あり',
-    LINK_FLG_OFF => 'なし'
+    LINK_FLG_ON  => "あり",
+    LINK_FLG_OFF => "なし"
   }.freeze
 
   URL_LENGTH_MAX = 255
-  OVERVIEW_LENGTH_MAX = 2000;
+  OVERVIEW_LENGTH_MAX = 2000
 
   RELEASE_FLG_LIMIT = 1
   RELEASE_FLG_ON = 1
   RELEASE_FLG_OFF = 2
   RELEASE_FLG_LIST = {
-    RELEASE_FLG_ON => '表示',
-    RELEASE_FLG_OFF => '非表示'
+    RELEASE_FLG_ON => "表示",
+    RELEASE_FLG_OFF => "非表示"
   }.freeze
 
-  ADMIN_PAGENATE_LIST_LIMIT = 2;
+  ADMIN_PAGENATE_LIST_LIMIT = 2
 end

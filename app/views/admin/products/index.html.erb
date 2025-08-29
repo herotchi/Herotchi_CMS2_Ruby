@@ -1,16 +1,38 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "製品情報一覧" %>
 
-<% content_for :title, "Products" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">製品情報一覧</li>
+    </ol>
+</nav>
 
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
 </div>
 
-<%= link_to "New product", new_product_path %>
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+        <%= render 'kaminari/bootstrap-5/number', collection: @products %>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">大カテゴリ名</th>
+                    <th>中カテゴリ名</th>
+                    <th>製品名</th>
+                    <th>表示設定</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @products.each do |product| %>
+                <%= render "index_product", product: product %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <%= paginate @products, theme: "bootstrap-5" %>
+    </div>
+</div>

@@ -4,7 +4,7 @@ class SecondCategory < ApplicationRecord
 
   validates :first_category_id,
     presence: true
-  validates :name, 
+  validates :name,
     presence: true,
     uniqueness: { scope: :first_category_id, allow_blank: true }
 
