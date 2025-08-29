@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "製品情報詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "製品情報一覧", admin_products_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">製品情報詳細</li>
+    </ol>
+</nav>
 
-<%= render @product %>
-
-<div>
-  <%= link_to "Edit this product", edit_admin_product_path(@product) %> |
-  <%= link_to "Back to products", admin_products_path %>
-
-  <%= button_to "Destroy this product", [:admin, @product], method: :delete %>
+<div class="card shadow mb-4">
+    <%= render @product %>
 </div>
+<%= render "shared/destroy_modal", title: "製品情報", path: admin_product_path(@product) %>
