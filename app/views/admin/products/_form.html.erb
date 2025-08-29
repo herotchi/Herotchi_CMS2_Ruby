@@ -129,7 +129,7 @@
                 const newOption = document.createElement('option');
                 newOption.value = item.value;
                 newOption.text = item.text;
-                if ("<%= params[ :second_category_id ].to_s %>" === item.value) {
+                if ("<%= @product.second_category_id %>" == item.value) {
                     newOption.setAttribute('selected', 'selected');
                 }
                 secondSelect.appendChild(newOption);

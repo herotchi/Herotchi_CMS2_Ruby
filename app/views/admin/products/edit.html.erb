@@ -1,12 +1,13 @@
-<% content_for :title, "Editing product" %>
+<% content_for :title, "製品情報編集" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "製品情報一覧", admin_products_path %></li>
+        <li class="breadcrumb-item"><%= link_to "製品情報詳細", admin_product_path(@product) %></li>
+        <li class="breadcrumb-item active" aria-current="page">お知らせ編集</li>
+    </ol>
+</nav>
 
-<h1>Editing product</h1>
-
-<%= render "form", product: @product %>
-
-<br>
-
-<div>
-  <%= link_to "Show this product", @product %> |
-  <%= link_to "Back to products", products_path %>
+<div class="card shadow mb-4">
+    <%= render "form", product: @product %>
 </div>
