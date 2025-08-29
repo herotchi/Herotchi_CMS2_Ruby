@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_27_020000) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_28_091251) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,6 +67,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_020000) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "tag_id"], name: "index_product_tags_on_product_id_and_tag_id", unique: true
+    t.index ["product_id"], name: "index_product_tags_on_product_id"
+    t.index ["tag_id"], name: "index_product_tags_on_tag_id"
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "first_category_id", null: false
     t.bigint "second_category_id", null: false
@@ -77,13 +87,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_020000) do
     t.datetime "updated_at", null: false
     t.index ["first_category_id"], name: "index_products_on_first_category_id"
     t.index ["second_category_id"], name: "index_products_on_second_category_id"
-  end
-
-  create_table "products_tags", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "tag_id", null: false
-    t.index ["product_id", "tag_id"], name: "index_products_tags_on_product_id_and_tag_id", unique: true
-    t.index ["tag_id", "product_id"], name: "index_products_tags_on_tag_id_and_product_id"
   end
 
   create_table "second_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -123,6 +126,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_020000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_tags", "products"
+  add_foreign_key "product_tags", "tags"
   add_foreign_key "products", "first_categories"
   add_foreign_key "products", "second_categories"
   add_foreign_key "second_categories", "first_categories"

@@ -3,7 +3,9 @@ class Admin::ProductsController < Admin::ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    # @products = Product.all
+    @second_categories = SecondCategory.all
+    @products = Product.search(params).order(id: :desc).page(params[:page]).per(ProductConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /products/1 or /products/1.json

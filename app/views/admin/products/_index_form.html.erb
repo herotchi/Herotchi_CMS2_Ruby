@@ -1,0 +1,157 @@
+<%= form_with url: admin_products_path, method: :get, local: true do |form| %>
+
+<div class="card-header">製品情報一覧</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :first_category_id, label: "大カテゴリ名" %>
+            <%= form.collection_select :first_category_id, FirstCategory.order(:id), :id, :name, { prompt: "---", selected: params[:first_category_id] }, { class: "form-select" } %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :second_category_id, label: "中カテゴリ名" %>
+            <%= form.collection_select :second_category_id, [], :id, :name, { prompt: "---", selected: params[:second_category_id] }, { class: "form-select" } %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :tag_ids, label: "タグ" %><br />
+            <%= form.collection_check_boxes :tag_ids, Tag.order(:id), :id, :name do |cb| %>
+            <div class="form-check form-check-inline">
+                <%= cb.check_box(class: "shadow-sm form-check-input", checked: Array(params[:tag_ids]).map(&:to_i).include?(cb.value.to_i)) %>
+                <%= cb.label(class: "form-check-label") %>
+            </div>
+            <% end %>
+        </div>
+
+<%
+=begin %>
+        
+            <% Tag.order(:id).each do |tag| %>
+                <div class="form-check form-check-inline">
+                    <%= form.check_box :tags_id_in, { multiple: true }, tag.id, nil %>
+                    <%= form.label :tags_id_in, value: tag.id, class: "" do %>
+                        <%= tag.name %>
+                    <% end %>
+                </div>
+            <% end %>>
+<%
+=end %>
+                
+                
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :name, label: "製品名" %>
+            <%= form.text_field :name, value: params[:name], class: "shadow-sm form-control" %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :release_flg, label: "表示設定" %>
+        <div class="btn-group mt-0 shadow-sm">
+            <% ProductConstants::RELEASE_FLG_LIST.each do |value, label| %>
+                <%= form.check_box :release_flg,{ id: "release_flg_#{value}", class: "btn-check", multiple: true, checked: Array(params[:release_flg]).map(&:to_i).include?(value.to_i) }, value, nil  %>
+                <%= form.label :release_flg, label, class: "btn btn-outline-success form-control#{' is-invalid' if form.object.respond_to?(:errors) && form.object.errors[:release_flg].any?}", for: "release_flg_#{value}" %>
+            <% end %>
+        </div>
+        <div class="<%= "mt-0#{' is-invalid' if form.object.respond_to?(:errors) && form.object.errors[:release_flg].any?}" %>"></div>
+
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "検索", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>
+<script>
+    const firstSelect = document.getElementById('first_category_id');
+    const secondSelect = document.getElementById('second_category_id');
+
+    // const secondCategories = {
+    //     {
+    //         Js::from(@second_categories)
+    //     }
+    // };
+    const secondCategories = <%= raw((@second_categories || []).to_json) %>;
+    const optionsByFirst = {};
+
+    // 大カテゴリごとに紐づいている中カテゴリの配列を作成
+    secondCategories.forEach(secondCategory => {
+        if (!optionsByFirst[secondCategory.first_category_id]) {
+            optionsByFirst[secondCategory.first_category_id] = [];
+        }
+
+        optionsByFirst[secondCategory.first_category_id].push({
+            value: secondCategory.id,
+            text: secondCategory.name
+        });
+    });
+
+    // 入力エラー等で画面が表示されたときに選択されていた大カテゴリと中カテゴリを再現する
+    document.addEventListener('DOMContentLoaded', function() {
+        const firstOption = firstSelect.value;
+        // 大カテゴリが選択されている場合
+        if (firstOption) {
+            const secondOptions = optionsByFirst[firstOption] || [];
+
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+
+            secondOptions.forEach(item => {
+                const newOption = document.createElement('option');
+                newOption.value = item.value;
+                newOption.text = item.text;
+                if ("<%= params[:second_category_id].to_s %>" == item.value) {
+                    newOption.setAttribute('selected', 'selected');
+                }
+                secondSelect.appendChild(newOption);
+            });
+        } else {
+            // 大カテゴリが選択されていない、もしくは入力エラーがあった場合
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+        }
+    });
+
+    // 大カテゴリが選択された場合、それに紐づいた中カテゴリのプルダウンを用意する
+    firstSelect.addEventListener('change', function() {
+        const firstOption = firstSelect.value;
+
+        // 存在する大カテゴリが選択された場合
+        if (firstOption) {
+            const secondOptions = optionsByFirst[firstOption] || [];
+
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+
+            secondOptions.forEach(item => {
+                const newOption = document.createElement('option');
+                newOption.value = item.value;
+                newOption.text = item.text;
+                secondSelect.appendChild(newOption);
+            });
+        } else {
+            // 空の大カテゴリが選択された場合
+            secondSelect.innerHTML = '';
+
+            const newOption = document.createElement('option');
+            newOption.value = '';
+            newOption.text = '---';
+            secondSelect.appendChild(newOption);
+        }
+    });
+</script>
