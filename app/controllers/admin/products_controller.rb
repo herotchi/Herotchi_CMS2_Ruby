@@ -20,6 +20,7 @@ class Admin::ProductsController < Admin::ApplicationController
 
   # GET /products/1/edit
   def edit
+    @second_categories = SecondCategory.all
   end
 
   # POST /products or /products.json
@@ -42,7 +43,7 @@ class Admin::ProductsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to [ :admin, @product ], notice: "Product was successfully updated." }
+        format.html { redirect_to [ :admin, @product ], notice: t("flash.actions.update.success", resource: Product.model_name.human) }
         format.json { render :show, status: :ok, location: @product }
       else
         @second_categories = SecondCategory.all
