@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "メディア詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "メディア一覧", admin_media_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">メディア詳細</li>
+    </ol>
+</nav>
 
-<%= render @medium %>
-
-<div>
-  <%= link_to "Edit this medium", edit_admin_medium_path(@medium) %> |
-  <%= link_to "Back to media", admin_media_path %>
-
-  <%= button_to "Destroy this medium", [:admin, @medium], method: :delete %>
+<div class="card shadow mb-4">
+    <%= render @medium %>
 </div>
+<%= render "shared/destroy_modal", title: "メディア", path: admin_medium_path(@medium) %>
