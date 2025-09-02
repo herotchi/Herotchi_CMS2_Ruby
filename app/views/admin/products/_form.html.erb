@@ -56,7 +56,7 @@
         </div>
 
         <div class="col-md-12">
-            <%= render 'shared/form_label', form: form, attribute: :detail, label: "製品画像", required: true %>
+            <%= render 'shared/form_label', form: form, attribute: :image, label: "製品画像", required: true %>
             <% if @product.persisted? && @product.image.attached? %>
             <%= image_tag url_for(@product.image) %>
             <% end %>

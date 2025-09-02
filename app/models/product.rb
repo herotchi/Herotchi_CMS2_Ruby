@@ -25,6 +25,7 @@ class Product < ApplicationRecord
     presence: true,
     length: { maximum: ProductConstants::DETAIL_LENGTH_MAX, allow_blank: true }
   validates :release_flg,
+    presence: true,
     inclusion: { in: ProductConstants::RELEASE_FLG_LIST.keys, allow_blank: true }
 
   # タグで絞り込み（すべて持つ）
