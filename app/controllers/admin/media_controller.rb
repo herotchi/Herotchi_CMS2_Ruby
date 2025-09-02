@@ -40,7 +40,7 @@ class Admin::MediaController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @medium.update(medium_params)
-        format.html { redirect_to [ :admin, @medium ], notice: "Medium was successfully updated." }
+        format.html { redirect_to [ :admin, @medium ], notice: t("flash.actions.update.success", resource: Medium.model_name.human) }
         format.json { render :show, status: :ok, location: @medium }
       else
         format.html { render :edit, status: :unprocessable_entity }
