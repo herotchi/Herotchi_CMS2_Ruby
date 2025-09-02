@@ -54,7 +54,7 @@ class Admin::MediaController < Admin::ApplicationController
     @medium.destroy!
 
     respond_to do |format|
-      format.html { redirect_to admin_media_path, status: :see_other, notice: "Medium was successfully destroyed." }
+      format.html { redirect_to admin_media_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: Medium.model_name.human) }
       format.json { head :no_content }
     end
   end
