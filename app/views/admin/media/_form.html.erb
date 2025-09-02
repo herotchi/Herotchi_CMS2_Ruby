@@ -32,7 +32,7 @@
         <div class="col-md-12">
             <%= render 'shared/form_label', form: form, attribute: :image, label: "メディア画像", required: true %>
             <% if @medium.persisted? && @medium.image.attached? %>
-            <%= image_tag url_for(@medium.image) %>
+            <%= image_tag url_for(@medium.image), class: "w-100" %>
             <% end %>
             <%= form.file_field :image, class: "form-control#{' is-invalid' if form.object.errors[:image].any?}" %>
             <div class="invalid-feedback"><%= form.object.errors.full_messages_for(:image).first %></div>

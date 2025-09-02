@@ -1,12 +1,13 @@
-<% content_for :title, "Editing medium" %>
+<% content_for :title, "メディア編集" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "メディア一覧", admin_media_path %></li>
+        <li class="breadcrumb-item"><%= link_to "メディア詳細", admin_medium_path(@medium) %></li>
+        <li class="breadcrumb-item active" aria-current="page">メディア編集</li>
+    </ol>
+</nav>
 
-<h1>Editing medium</h1>
-
-<%= render "form", medium: @medium %>
-
-<br>
-
-<div>
-  <%= link_to "Show this medium", [:admin, @medium] %> |
-  <%= link_to "Back to media", admin_media_path %>
+<div class="card shadow mb-4">
+    <%= render "form", medium: @medium %>
 </div>
