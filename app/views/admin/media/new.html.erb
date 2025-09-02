@@ -1,0 +1,11 @@
+<% content_for :title, "メディア登録" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">メディア登録</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= render "form", medium: @medium %>
+</div>

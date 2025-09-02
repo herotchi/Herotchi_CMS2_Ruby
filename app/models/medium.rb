@@ -1,0 +1,20 @@
+class Medium < ApplicationRecord
+  has_one_attached :image
+
+  validates :media_flg,
+    presence: true,
+    inclusion: { in: MediaConstants::MEDIA_FLG_LIST.keys, allow_blank: true  }
+  validates :image,
+    attached: true,
+    content_type: [ "image/png", "image/jpeg" ],
+    size: { less_than_or_equal_to: MediaConstants::IMAGE_FILE_MAX.megabytes }
+  validates :alt,
+    presence: true,
+    length: { maximum: MediaConstants::ALT_LENGTH_MAX, allow_blank: true }
+  validates :url,
+    presence: true,
+    length: { maximum: MediaConstants::URL_LENGTH_MAX, allow_blank: true }
+  validates :release_flg,
+    presence: true,
+    inclusion: { in: MediaConstants::RELEASE_FLG_LIST.keys, allow_blank: true }
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_091251) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_01_030738) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_091251) do
     t.string "login_id", limit: 20, default: "", null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["login_id"], name: "index_managers_on_login_id", unique: true
+  end
+
+  create_table "media", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "media_flg", limit: 1, null: false
+    t.string "alt", limit: 100, null: false
+    t.string "url", null: false
+    t.integer "release_flg", limit: 1, default: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "news", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

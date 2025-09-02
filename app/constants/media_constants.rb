@@ -1,0 +1,23 @@
+module MediaConstants
+  MEDIA_FLG_CAROUSEL = 1
+  MEDIA_FLG_PICKUP = 2
+  MEDIA_FLG_LIST = {
+    MEDIA_FLG_CAROUSEL  => "カルーセル",
+    MEDIA_FLG_PICKUP    => "pick up"
+}.freeze
+  MEDIA_FLG_LIMIT = 1
+
+  IMAGE_FILE_MAX = 5120
+  ALT_LENGTH_MAX = 100
+  URL_LENGTH_MAX = 255
+
+  RELEASE_FLG_ON = 1
+  RELEASE_FLG_OFF = 2
+  RELEASE_FLG_LIST = {
+    RELEASE_FLG_ON => "表示",
+    RELEASE_FLG_OFF => "非表示"
+  }.freeze
+  RELEASE_FLG_LIMIT = 1
+
+  ADMIN_PAGENATE_LIST_LIMIT = 2
+end

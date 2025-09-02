@@ -6,6 +6,7 @@ ja:
       second_category: 中カテゴリ
       tag: タグ
       product: 製品情報
+      medium: メディア
     attributes:
       news:
         title: タイトル
@@ -31,4 +32,10 @@ ja:
         name: 製品名
         image: 製品画像
         detail: 製品詳細
+        release_flg:
+      medium:
+        media_flg: メディア設定
+        image: メディア画像
+        alt: 代替テキスト
+        url: URL
         release_flg: 表示設定

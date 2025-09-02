@@ -1,0 +1,68 @@
+<%= form_with(model: [:admin, medium]) do |form| %>
+<%
+=begin %>
+<% if medium.errors.any? %>
+    <div style="color: red">
+        <h2><%= pluralize(medium.errors.count, "error") %> prohibited this medium from being saved:</h2>
+
+        <ul>
+        <% medium.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+        <% end %>
+        </ul>
+    </div>
+<% end %>
+<%
+=end %>
+<div class="card-header">
+    <% if medium.new_record? %>
+    製品情報登録
+    <% else %>
+    製品情報編集
+    <% end %>
+</div>
+
+<div class="card-body">
+    <div class="row g-3">
+    
+        <%= render 'shared/form_label', form: form, attribute: :media_flg, label: "メディア設定", required: true %>
+        <%= render 'shared/radio_button_group', form: form, attribute: :media_flg, collection: MediaConstants::MEDIA_FLG_LIST %>
+        <%= render 'shared/error_message', form: form, attribute: :media_flg %>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :image, label: "メディア画像", required: true %>
+            <% if @medium.persisted? && @medium.image.attached? %>
+            <%= image_tag url_for(@medium.image) %>
+            <% end %>
+            <%= form.file_field :image, class: "form-control#{' is-invalid' if form.object.errors[:image].any?}" %>
+            <div class="invalid-feedback"><%= form.object.errors.full_messages_for(:image).first %></div>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :alt, label: "代替テキスト", required: true %>
+            <%= form.text_field :alt, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:alt].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :alt %>
+        </div>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :url, label: "URL", required: true %>
+            <%= form.text_field :url, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:url].any?}" %>
+            <%= render 'shared/error_message', form: form, attribute: :url %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :release_flg, label: "表示設定", required: true %>
+        <%= render 'shared/radio_button_group', form: form, attribute: :release_flg, collection: MediaConstants::RELEASE_FLG_LIST %>
+        <%= render 'shared/error_message', form: form, attribute: :release_flg %>
+
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "保存", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+
+<% end %>
