@@ -1,0 +1,11 @@
+<div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+    <%= link_to [:admin, medium], class: "text-decoration-none" do %>
+        <div class="card text-bg-light">
+            <%= image_tag medium.image, class: "card-img-top w-100 h-auto", alt: medium.alt %>
+            <div class="card-body">
+                <p class="card-text">メディア設定：<%= MediaConstants::MEDIA_FLG_LIST[medium.media_flg] %></p>
+                <p class="card-text">表示設定：<%= MediaConstants::RELEASE_FLG_LIST[medium.release_flg] %></p>
+            </div>
+        </div>
+    <% end %>
+</div>

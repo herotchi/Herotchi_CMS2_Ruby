@@ -17,4 +17,12 @@ class Medium < ApplicationRecord
   validates :release_flg,
     presence: true,
     inclusion: { in: MediaConstants::RELEASE_FLG_LIST.keys, allow_blank: true }
+
+  def self.ransackable_attributes(auth_object = nil)
+     %w[media_flg alt release_flg]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+     []
+  end
 end
