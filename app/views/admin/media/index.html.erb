@@ -1,16 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "メディア一覧" %>
 
-<% content_for :title, "Media" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">メディア一覧</li>
+    </ol>
+</nav>
 
-<h1>Media</h1>
-
-<div id="media">
-  <% @media.each do |medium| %>
-    <%= render medium %>
-    <p>
-      <%= link_to "Show this medium", [:admin, medium] %>
-    </p>
-  <% end %>
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
 </div>
 
-<%= link_to "New medium", new_admin_medium_path %>
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+        <%= render 'kaminari/bootstrap-5/number', collection: @media %>
+    </div>
+    <div class="card-body">
+        <div class="row">
+        <% @media.each do |medium| %>
+            <%= render "index_medium", medium: medium %>
+        <% end %>
+        </div>
+    </div>
+    <div class="card-footer">
+        <%= paginate @media, theme: "bootstrap-5" %>
+    </div>
+</div>

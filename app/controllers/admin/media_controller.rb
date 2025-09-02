@@ -3,7 +3,9 @@ class Admin::MediaController < Admin::ApplicationController
 
   # GET /admin/media or /admin/media.json
   def index
-    @media = Medium.all
+    # @media = Medium.all
+    @q = Medium.ransack(params[:q])
+    @media = @q.result.page(params[:page]).per(MediaConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /admin/media/1 or /admin/media/1.json

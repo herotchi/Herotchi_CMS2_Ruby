@@ -1,0 +1,28 @@
+<%= search_form_for @q, url: admin_media_path, method: :get do |form| %>
+
+<div class="card-header">お知らせ一覧</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <%= render 'shared/form_label', form: form, attribute: :media_flg_in, label: "メディア設定" %>
+        <%= render 'shared/checkbox_group', form: form, attribute: :media_flg_in, collection: MediaConstants::MEDIA_FLG_LIST %>
+
+        <div class="col-md-12">
+            <%= render 'shared/form_label', form: form, attribute: :alt_cont, label: "代替テキスト" %>
+            <%= form.text_field :alt_cont, class: "shadow-sm form-control" %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :release_flg_in, label: "表示設定" %>
+        <%= render 'shared/checkbox_group', form: form, attribute: :release_flg_in, collection: MediaConstants::RELEASE_FLG_LIST %>
+
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "検索", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>
