@@ -1,0 +1,17 @@
+<tr>
+    <td scope="rol">
+        <%= link_to contact.no, [:admin, contact] %>
+    </td>
+    <td>
+        <%= contact.user.name %>
+    </td>
+    <td>
+        <%= contact.user.email %>
+    </td>
+    <td>
+        <%= contact.created_at.strftime('%Y/%m/%d') %>
+    </td>
+    <td>
+        <%= ContactConstants::STATUS_LIST[contact.status] %>
+    </td>
+</tr>

@@ -7,6 +7,14 @@ class Contact < ApplicationRecord
     presence: true,
     length: { maximum: ContactConstants::BODY_LENGTH_MAX, allow_blank: true }
 
+  def self.ransackable_attributes(auth_object = nil)
+     %w[no body created_at status]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+     []
+  end
+
   private
 
   def generate_no
