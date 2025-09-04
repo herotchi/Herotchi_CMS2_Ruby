@@ -7,6 +7,7 @@ ja:
       tag: タグ
       product: 製品情報
       medium: メディア
+      contact: お問い合わせ
     attributes:
       news:
         title: タイトル
@@ -39,3 +40,5 @@ ja:
         alt: 代替テキスト
         url: URL
         release_flg: 表示設定
+      contact:
+        body: お問い合わせ内容

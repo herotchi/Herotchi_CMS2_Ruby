@@ -27,7 +27,7 @@
 
         <div class="col-md-12">
             <%= render 'shared/form_label', form: form, attribute: :overview, label: "概要", required: false %>
-            <%= form.text_area :overview, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:overview].any?}" %>
+            <%= form.text_area :overview, rows: 4, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:overview].any?}" %>
             <%= render 'shared/error_message', form: form, attribute: :overview %>
         </div>
 

@@ -1,0 +1,17 @@
+module ContactConstants
+  NO_LENGTH = 16
+  BODY_LENGTH_MAX = 2000
+
+  STATUS_LIMIT = 1
+  STATUS_COMPLETED = 1
+  STATUS_IN_PROGRESS = 2
+  STATUS_NOT_STARTED = 3
+
+  STATUS_LIST = {
+    STATUS_COMPLETED  => "対応済",
+    STATUS_IN_PROGRESS => "対応中",
+    STATUS_NOT_STARTED => "未対応"
+  }.freeze
+
+  ADMIN_PAGENATE_LIST_LIMIT = 2
+end

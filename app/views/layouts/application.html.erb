@@ -23,10 +23,15 @@
     <%= javascript_importmap_tags %>
 </head>
 
-<body>
+<body class="bg-body-tertiary h-100">
+公開側
     <%= render "layouts/navigation" %>
-    <%= yield %>
-    <%= render "layouts/toasts" %>
+    <div class="container">
+        <main>
+            <%= yield %>
+        </main>
+        <%= render "layouts/toasts" %>
+    </div>
 </body>
 
 </html>

@@ -66,7 +66,7 @@
 
         <div class="col-md-12">
             <%= render 'shared/form_label', form: form, attribute: :detail, label: "製品詳細", required: true %>
-            <%= form.text_area :detail, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:detail].any?}" %>
+            <%= form.text_area :detail, rows: 4, class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:detail].any?}" %>
             <%= render 'shared/error_message', form: form, attribute: :detail %>
         </div>
 
