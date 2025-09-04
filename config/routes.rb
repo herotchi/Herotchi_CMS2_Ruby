@@ -8,6 +8,13 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations"
   }
 
+  resources :contacts, only: [ :new, :create ] do
+    collection do
+      post "confirm"
+      get "complete"
+    end
+  end
+
   namespace :admin do
     root "top#index"
     devise_for :managers, controllers: {

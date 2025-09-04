@@ -1,0 +1,31 @@
+<% content_for :title, "お問い合わせ確認" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">お問い合わせ</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= form_with model: @contact, url: contacts_path, local: true do |form| %>
+        <%= form.hidden_field :body %>
+        <div class="card-header">お問い合わせ確認</div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <h5>お問い合わせ内容</h5>
+                    <span><%= simple_format(h(@contact.body)) %></span>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-12 text-center my-2">
+                    <%= form.submit "お問い合わせ", class: "btn btn-primary w-50" %>
+                    <%= form.submit "戻る", name: "back", class: "btn btn-secondary" %>
+                </div>
+            </div>
+        </div>
+
+    <% end %>
+</div>
