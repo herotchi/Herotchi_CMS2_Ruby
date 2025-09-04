@@ -5,7 +5,12 @@ class Contact < ApplicationRecord
 
   validates :body,
     presence: true,
-    length: { maximum: ContactConstants::BODY_LENGTH_MAX, allow_blank: true }
+    length: { maximum: ContactConstants::BODY_LENGTH_MAX, allow_blank: true },
+    on: :create
+  validates :status,
+    presence: true,
+    inclusion: { in: ContactConstants::STATUS_LIST.keys, allow_blank: true },
+    on: :update
 
   def self.ransackable_attributes(auth_object = nil)
      %w[no body created_at status]

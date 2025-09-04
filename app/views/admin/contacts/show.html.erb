@@ -1,2 +1,12 @@
-<h1>Admin::Contacts#show</h1>
-<p>Find me in app/views/admin/contacts/show.html.erb</p>
+<% content_for :title, "お問い合わせ詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "お問い合わせ一覧", admin_contacts_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">お問い合わせ詳細</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= render @contact %>
+</div>
