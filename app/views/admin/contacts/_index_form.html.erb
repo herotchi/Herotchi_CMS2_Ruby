@@ -1,0 +1,40 @@
+<%= search_form_for @q, url: admin_contacts_path, method: :get do |form| %>
+
+<div class="card-header">お問い合わせ一覧</div>
+<div class="card-body">
+    <div class="row g-3">
+
+        <div class="col-md-6">
+            <%= render 'shared/form_label', form: form, attribute: :no_eq, label: "お問い合わせ番号" %>
+            <%= form.text_field :no_eq, class: "shadow-sm form-control" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= render 'shared/form_label', form: form, attribute: :body_cont, label: "お問い合わせ内容" %>
+            <%= form.text_field :body_cont, class: "shadow-sm form-control" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= render 'shared/form_label', form: form, attribute: :created_at_gteq, label: "投稿日～" %>
+            <%= form.date_field :created_at_gteq, class: "shadow-sm form-control" %>
+        </div>
+
+        <div class="col-md-6">
+            <%= render 'shared/form_label', form: form, attribute: :created_at_lteq, label: "～投稿日" %>
+            <%= form.date_field :created_at_lteq, class: "shadow-sm form-control" %>
+        </div>
+
+        <%= render 'shared/form_label', form: form, attribute: :status_in, label: "ステータス" %>
+        <%= render 'shared/checkbox_group', form: form, attribute: :status_in, collection: ContactConstants::STATUS_LIST %>
+
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "検索", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>

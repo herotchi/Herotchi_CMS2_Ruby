@@ -27,6 +27,11 @@ Rails.application.routes.draw do
     resources :tags
     resources :products
     resources :media
+    resources :contacts, only: [ :index, :show ] do
+      member do
+        put :update_status   # PUT /admin/contacts/:id/update_status
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

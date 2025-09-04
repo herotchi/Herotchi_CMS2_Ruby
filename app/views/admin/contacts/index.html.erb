@@ -1,0 +1,39 @@
+<% content_for :title, "お問い合わせ一覧" %>
+
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">お問い合わせ一覧</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= render "index_form" %>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header text-end">
+        <%= render 'kaminari/bootstrap-5/number', collection: @contacts %>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">お問い合わせ番号</th>
+                    <th>氏名</th>
+                    <th>メールアドレス</th>
+                    <th>投稿日</th>
+                    <th>ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @contacts.each do |contact| %>
+                <%= render "index_contact", contact: contact %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <%= paginate @contacts, theme: "bootstrap-5" %>
+    </div>
+</div>
