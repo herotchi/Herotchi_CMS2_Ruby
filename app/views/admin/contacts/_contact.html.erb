@@ -1,0 +1,40 @@
+<%= form_with(model: [:admin, contact]) do |form| %>
+<div class="card-header">お問い合わせ詳細</div>
+<div class="card-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <h5>お問い合わせ番号</h5>
+            <span><%= contact.no %></span>
+        </li>
+        <li class="list-group-item">
+            <h5>投稿日</h5>
+            <span><%= contact.created_at.strftime('%Y/%m/%d') %></span>
+        </li>
+        <li class="list-group-item">
+            <h5>氏名</h5>
+            <span><%= contact.user.name %></span>  
+        </li>
+        <li class="list-group-item">
+            <h5>メールアドレス</h5>
+            <span><%= contact.user.email %></span>
+        </li>
+        <li class="list-group-item">
+            <h5>お問い合わせ内容</h5>
+            <span><%= simple_format(h(contact.body)) %></span>
+        </li>
+        <li class="list-group-item">
+            <h5>ステータス</h5>
+            <%= form.select :status, ContactConstants::STATUS_LIST.invert, { selected: contact.status }, { class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:status].any?}" }  %>
+            <%= render 'shared/error_message', form: form, attribute: :status %>
+        </li>
+    </ul>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <%= form.submit "保存", class: "btn btn-primary w-50" %>
+            <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+        </div>
+    </div>
+</div>
+<% end %>
