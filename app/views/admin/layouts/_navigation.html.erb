@@ -1,14 +1,84 @@
-<header>
-    <% if admin_manager_signed_in? %>
-    <li>
-        <%= link_to "アカウント情報更新", edit_admin_manager_registration_path %>
-    </li>
-    <li>
-        <%= button_to "ログアウト", destroy_admin_manager_session_path, method: :delete %>
-    </li>
-    <% else %>
-    <li>
-        <%= link_to "ログイン", new_admin_manager_session_path %>
-    </li>
-    <% end %>
-</header>
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark mb-3" data-bs-theme="dark">
+    <div class="container-fluid">
+        <%= image_tag "logo.png", alt: "TOP", class: "", width: "32", height: "32" %>
+        <span class="text-danger fs-4 fw-semibold ps-2">管理画面</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <%= link_to "TOP", admin_root_path, class: "nav-link#{" active" if controller.controller_name == "top" && action_name == "index"}" %>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= "active" if controller.controller_name == "news" %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" <%= 'aria-current="page"' if controller.controller_name == "news" %>>お知らせ
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "お知らせ登録", new_admin_news_path, class: "dropdown-item#{" active" if controller.controller_name == "news" && action_name == "new"}" %></li>
+                        <li><%= link_to "お知らせ一覧", admin_news_index_path, class: "dropdown-item#{" active" if controller.controller_name == "news" && action_name == "index"}" %></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= "active" if controller.controller_name == "first_categories" || controller.controller_name == "second_categories" %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"<%= 'aria-current="page"' if controller.controller_name == "first_categories" || controller.controller_name == "second_categories" %>>カテゴリ
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "大カテゴリ登録", new_admin_first_category_path, class: "dropdown-item#{" active" if controller.controller_name == "first_categories" && action_name == "new"}" %></li>
+                        <li><%= link_to "大カテゴリ一覧", admin_first_categories_path, class: "dropdown-item#{" active" if controller.controller_name == "first_categories" && action_name == "index"}" %></li>
+<%
+=begin %>
+<li><a class="dropdown-item" href="{{ route('admin.first_category.csv_upload') }}">大カテゴリCSV登録</a></li>
+<%
+=end %>
+                        <li><%= link_to "中カテゴリ登録", new_admin_second_category_path, class: "dropdown-item#{" active" if controller.controller_name == "second_categories" && action_name == "new"}" %></li>
+                        <li><%= link_to "中カテゴリ一覧", admin_second_categories_path, class: "dropdown-item#{" active" if controller.controller_name == "second_categories" && action_name == "index"}" %></li>
+<%
+=begin %>
+<li><a class="dropdown-item" href="{{ route('admin.second_category.csv_upload') }}">中カテゴリCSV登録</a></li>
+<%
+=end %>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= "active" if controller.controller_name == "tags" %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" <%= 'aria-current="page"' if controller.controller_name == "tags" %>>タグ
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "タグ登録", admin_tags_path, class: "dropdown-item#{" active" if controller.controller_name == "tags" && action_name == "new"}" %></li>
+                        <li><%= link_to "タグ一覧", new_admin_tag_path, class: "dropdown-item#{" active" if controller.controller_name == "tags" && action_name == "index"}" %></li>
+<%
+=begin %>
+<li><a class="dropdown-item" href="{{ route('admin.tag.csv_upload') }}">タグCSV登録</a></li>
+<%
+=end %>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= "active" if controller.controller_name == "products" %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" <%= 'aria-current="page"' if controller.controller_name == "products" %>>製品情報
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "製品情報登録", new_admin_product_path, class: "dropdown-item#{" active" if controller.controller_name == "products" && action_name == "new"}" %></li>
+                        <li><%= link_to "製品情報一覧", admin_products_path, class: "dropdown-item#{" active" if controller.controller_name == "products" && action_name == "index"}" %></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= "active" if controller.controller_name == "media" %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" <%= 'aria-current="page"' if controller.controller_name == "media" %>>メディア
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "メディア登録", new_admin_medium_path, class: "dropdown-item#{" active" if controller.controller_name == "media" && action_name == "new"}" %></li>
+                        <li><%= link_to "メディア一覧", admin_media_path, class: "dropdown-item#{" active" if controller.controller_name == "media" && action_name == "index"}" %></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle <%= "active" if controller.controller_name == "contacts" %>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" <%= 'aria-current="page"' if controller.controller_name == "contacts" %>>お問い合わせ
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><%= link_to "お問い合わせ一覧", admin_contacts_path, class: "dropdown-item#{" active" if controller.controller_name == "contacts" && action_name == "index"}" %></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "プロフィール", edit_admin_manager_registration_path, class: "nav-link#{" active" if controller.controller_name == "registrations" && action_name == "edit"}" %>
+                </li>
+            </ul>
+            <%= button_to "ログアウト", destroy_admin_manager_session_path, method: :delete, class: "btn btn-outline-success" %>
+        </div>
+    </div>
+</nav>

@@ -1,4 +1,4 @@
-class Admin::ContactsController < ApplicationController
+class Admin::ContactsController < Admin::ApplicationController
   before_action :set_contact, only: %i[ show update ]
   def index
     @q = Contact.ransack(params[:q])
