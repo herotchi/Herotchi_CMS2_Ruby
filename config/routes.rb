@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations"
   }
 
+  resources :news, only: [ :index, :show ]
   resources :contacts, only: [ :new, :create ] do
     collection do
       post "confirm"
