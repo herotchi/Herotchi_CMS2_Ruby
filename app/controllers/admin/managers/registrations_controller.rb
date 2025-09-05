@@ -26,9 +26,10 @@ class Admin::Managers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    # super
+    redirect_to admin_root_path, alert: "プロフィールの削除は許可されていません。"
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
