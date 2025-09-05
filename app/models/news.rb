@@ -26,6 +26,8 @@ class News < ApplicationRecord
     length: { maximum: NewsConstants::OVERVIEW_LENGTH_MAX, allow_blank: true },
     if: -> { link_flg == NewsConstants::LINK_FLG_OFF && errors[:link_flg].blank? }
 
+  scope :released, -> { where(release_flg: NewsConstants::RELEASE_FLG_ON).where("release_date <= ?", Date.today).order(release_date: :desc) }
+
   def self.ransackable_attributes(auth_object = nil)
      %w[title link_flg release_date release_flg]
   end

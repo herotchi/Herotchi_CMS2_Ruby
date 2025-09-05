@@ -1,0 +1,27 @@
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">お知らせ一覧</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+    <% @news.each do |news| %>
+        <p class="mb-1"><%= news.release_date.strftime('%Y年%m月%d日') %></p>
+        <p class="ms-4 mb-4">
+        <% if news.link_flg == NewsConstants::LINK_FLG_ON %>
+            <a href="<%= news.url %>" target="_blank" rel="noopener noreferrer">
+                <%= news.title %>
+                <%= render "shared/blank" %>
+            </a>
+        <% else %>
+            <%= link_to news.title, news_path(news) %>
+        <% end %>
+        </p>
+    <% end %>
+    </div>
+    <div class="card-footer">
+        <%= paginate @news, theme: "bootstrap-5" %>
+    </div>
+</div>
