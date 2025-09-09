@@ -12,4 +12,5 @@ module ProductConstants
   }.freeze
 
   ADMIN_PAGENATE_LIST_LIMIT = 2
+  PAGENATE_LIST_LIMIT = 2
 end

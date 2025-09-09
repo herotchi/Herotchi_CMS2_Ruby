@@ -1,0 +1,33 @@
+<% content_for :title, "製品情報一覧" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">製品情報一覧</li>
+    </ol>
+</nav>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card shadow">
+            <%= render "index_form" %>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="card shadow">
+            <div class="card-header text-end">
+                <%= render 'kaminari/bootstrap-5/number', collection: @products %>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                <% @products.each do |product| %>
+                    <%= render "index_product", product: product %>
+                <% end %>
+                </div>
+            </div>
+            <div class="card-footer">
+                <%= paginate @products, theme: "bootstrap-5" %>
+            </div>
+        </div>
+    </div>
+</div>
