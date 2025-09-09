@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   }
 
   resources :news, only: [ :index, :show ]
+  resources :products, only: [ :index, :show ]
   resources :contacts, only: [ :new, :create ] do
     collection do
       post "confirm"

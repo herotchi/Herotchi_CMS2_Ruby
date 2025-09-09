@@ -59,13 +59,57 @@ class Product < ApplicationRecord
     where(release_flg: flgs) if flgs.present?
   }
 
-  # 全体の検索メソッド
-  def self.search(params)
+  # 公開側キーワード検索
+  scope :by_keyword, ->(keyword) {
+    if keyword.present?
+      # 全角スペースを半角スペースに変換
+      keyword = keyword.tr("　", " ")
+      # 前後のスペース削除
+      keyword = keyword.strip
+      # 連続する半角スペースを1つに
+      keyword = keyword.gsub(/\s+/, " ")
+      # 分割
+      keywords = keyword.split(" ")
+
+      # SQL文を parts にためていく
+      sql_parts = []
+      # バインド用の値を values にためていく
+      values = []
+
+      keywords.each do |word|
+        # 例: (name LIKE ? OR detail LIKE ?)
+        sql_parts << "(name LIKE ? OR detail LIKE ?)"
+        # プレースホルダに入れる値を追加
+        values << "%#{word}%"
+        values << "%#{word}%"
+      end
+
+      # 複数キーワードの場合は AND でつなげる
+      sql = sql_parts.join(" AND ")
+
+      # 例: WHERE (name LIKE ? OR detail LIKE ?) AND (name LIKE ? OR detail LIKE ?)
+      where(sql, *values)
+    end
+  }
+
+  # 管理側全体の検索メソッド
+  def self.admin_search(params)
     products = all
     products = products.by_tags(params[:tag_ids])
     products = products.by_first_category(params[:first_category_id])
     products = products.by_second_category(params[:second_category_id])
     products = products.by_name(params[:name])
+    products = products.by_release_flg(params[:release_flg])
+    products
+  end
+
+  # 公開側全体の検索メソッド
+  def self.search(params)
+    products = all
+    products = products.by_tags(params[:tag_ids])
+    products = products.by_first_category(params[:first_category_id])
+    products = products.by_second_category(params[:second_category_id])
+    products = products.by_keyword(params[:keyword])
     products = products.by_release_flg(params[:release_flg])
     products
   end

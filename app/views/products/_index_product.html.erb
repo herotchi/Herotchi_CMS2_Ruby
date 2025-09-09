@@ -1,0 +1,25 @@
+<div class="col-xxl-3 col-lg-4 col-md-6 mb-3">
+    <%= link_to product_path(product), class: "link-underline link-underline-opacity-0" do %>
+        <div class="card text-bg-light">
+            <%= image_tag product.image, alt: product.name, class: "card-img-top w-100 h-auto" %>
+            <div class="card-body">
+                <p class="card-text mb-1 text-secondary fs-6">
+                    <small>
+                        カテゴリ:
+                        <%= product.first_category.name %>,
+                        <%= product.second_category.name %>
+                    </small>
+                </p>
+                <p class="card-text mb-1 text-secondary fs-6">
+                    <small>
+                        タグ:
+                        <% product.tags.each do |tag| %>
+                        <%= tag.name %>
+                        <% end %>
+                    </small>
+                </p>
+                <p class="card-text"><b><%= product.name %></b></p>
+            </div>
+        </div>
+    <% end %>
+</div>
