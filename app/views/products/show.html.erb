@@ -1,2 +1,49 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<% content_for :title, "製品情報詳細" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", root_path %></li>
+        <li class="breadcrumb-item"><%= link_to "製品情報一覧", products_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">製品情報詳細</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <div class="card-header">製品情報詳細</div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h5>大カテゴリ名</h5>
+                <span><%= @product.first_category.name %></span>
+            </li>
+            <li class="list-group-item">
+                <h5>中カテゴリ名</h5>
+                <span><%= @product.second_category.name %></span>
+            </li>
+            <li class="list-group-item">
+                <h5>タグ名</h5>
+                <% @product.tags.each do |tag| %>
+                    <span><%= tag.name %></span>  
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <h5>製品名</h5>
+                <span><%= @product.name %></span>
+            </li>
+            <li class="list-group-item">
+                <h5>製品画像</h5>
+                <%= image_tag @product.image, class: "w-100" %>
+            </li>
+            <li class="list-group-item">
+                <h5>製品詳細</h5>
+                <span><%= simple_format(h(@product.detail)) %></span>
+            </li>
+        </ul>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-12 text-center my-2">
+                <%= link_to "戻る", root_path, class: "btn btn-secondary w-50", role: "button" %>
+            </div>
+        </div>
+    </div>
+</div>
