@@ -8,44 +8,44 @@
 
 <div class="card shadow mb-4">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |form| %>
-    <div class="card-header">プロフィール</div>
-    <div class="card-body">
-        <div class="row g-3">
+        <div class="card-header">プロフィール</div>
+        <div class="card-body">
+            <div class="row g-3">
 
-            <div class="col-md-12">
-                <%= render 'shared/form_label', form: form, attribute: :login_id, label: "ログインID", required: true %>
-                <%= form.text_field :login_id, autofocus: true, autocomplete: "login_id", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:login_id].any?}" %>
-                <%= render 'shared/error_message', form: form, attribute: :login_id %>
-            </div>
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :login_id, label: "ログインID", required: true %>
+                    <%= form.text_field :login_id, autofocus: true, autocomplete: "login_id", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:login_id].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :login_id %>
+                </div>
 
-            <div class="col-md-12">
-                <%= render 'shared/form_label', form: form, attribute: :email, label: "メールアドレス", required: true %>
-                <%= form.text_field :email, autocomplete: "email", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:email].any?}" %>
-                <%= render 'shared/error_message', form: form, attribute: :email %>
-            </div>
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :email, label: "メールアドレス", required: true %>
+                    <%= form.text_field :email, autocomplete: "email", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:email].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :email %>
+                </div>
 
-            <div class="col-md-12">
-                <%= render 'shared/form_label', form: form, attribute: :email, label: "パスワード（leave blank if you don't want to change it）" %>
-                <%= form.password_field :password, autocomplete: "new-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:password].any?}" %>
-                <%= render 'shared/error_message', form: form, attribute: :password %>
-            </div>
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :password, label: "パスワード（leave blank if you don't want to change it）" %>
+                    <%= form.password_field :password, autocomplete: "new-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:password].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :password %>
+                </div>
 
-            <div class="col-md-12">
-                <%= render 'shared/form_label', form: form, attribute: :password_confirmation, label: "パスワード（確認用）" %>
-                <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:password_confirmation].any?}" %>
-                <%= render 'shared/error_message', form: form, attribute: :password_confirmation %>
-            </div>
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :password_confirmation, label: "パスワード（確認用）" %>
+                    <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:password_confirmation].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :password_confirmation %>
+                </div>
 
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-12 text-center my-2">
-                <%= form.submit "更新", class: "btn btn-primary w-50" %>
-                <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
             </div>
         </div>
-    </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-12 text-center my-2">
+                    <%= form.submit "更新", class: "btn btn-primary w-50" %>
+                    <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+                </div>
+            </div>
+        </div>
     <% end %>
 </div>
 <%

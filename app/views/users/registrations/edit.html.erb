@@ -1,3 +1,65 @@
+<% content_for :title, "プロフィール" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">プロフィール</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |form| %>
+        <div class="card-header">プロフィール</div>
+        <div class="card-body">
+            <div class="row g-3">
+
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :email, label: "メールアドレス", required: true %>
+                    <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:email].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :email %>
+                </div>
+
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :name, label: "ユーザー名", required: true %>
+                    <%= form.text_field :name, autocomplete: "name", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:name].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :name %>
+                </div>
+
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :password, label: "パスワード（leave blank if you don't want to change it）" %>
+                    <%= form.password_field :password, autocomplete: "new-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:password].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :password %>
+                </div>
+
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :password_confirmation, label: "パスワード（確認用）" %>
+                    <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:password_confirmation].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :password_confirmation %>
+                </div>
+
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: form, attribute: :current_password, label: "現在のパスワード（we need your current password to confirm your changes）", required: true %>
+                    <%= form.password_field :current_password, autocomplete: "current-password", class: "shadow-sm form-control#{' is-invalid' if form.object.errors[:current_password].any?}" %>
+                    <%= render 'shared/error_message', form: form, attribute: :current_password %>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-12 text-center my-2">
+                    <%= form.submit "更新", class: "btn btn-primary w-50" %>
+                    <%= link_to "戻る", root_path, class: "btn btn-secondary", role: "button" %>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-danger float-end" data-bs-toggle="modal" data-bs-target="#destroyModal">アカウント削除</button>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<%= render "shared/destroy_modal", title: "アカウント", path: registration_path(resource_name) %>
+<%
+=begin%>
+<%= button_to "アカウント削除", registration_path(resource_name),  class: "btn btn-outline-danger float-end", data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -40,9 +102,10 @@
     <%= f.submit "Update" %>
 </div>
 <% end %>
-
 <h3>Cancel my account</h3>
 
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
 <%= link_to "Back", :back %>
+<%
+=end%>
