@@ -16,6 +16,26 @@ class User < ApplicationRecord
     acceptance: { on: :create },
     unless: :devise_password_reset?
 
+  # 論理削除
+  def soft_delete
+    update(deleted_at: Time.current)
+  end
+
+  # 削除済み判定
+  def deleted?
+    deleted_at.present?
+  end
+
+  # Devise ログイン可否判定
+  def active_for_authentication?
+    super && !deleted?
+  end
+
+  # ログイン不可時のメッセージ
+  def inactive_message
+    deleted? ? :deleted_account : super
+  end
+
   private
 
   def devise_password_reset?
