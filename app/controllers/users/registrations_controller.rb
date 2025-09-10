@@ -29,6 +29,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def destroy
   #   super
   # end
+  def destroy
+    # 物理削除ではなく論理削除
+    resource.soft_delete
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    # メッセージを flash にセット
+    flash[:alert] = "退会処理が完了しました。ご利用ありがとうございました。"
+    # ユーザー登録画面にリダイレクト
+    redirect_to new_user_registration_path
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
