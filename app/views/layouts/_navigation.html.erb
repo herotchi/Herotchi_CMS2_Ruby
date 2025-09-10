@@ -1,3 +1,33 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-bottom-dark mb-3" data-bs-theme="dark">
+    <div class="container-fluid">
+         <%= image_tag "logo.png", alt: "TOP", class: "", width: "32", height: "32" %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <%= link_to "TOP", root_path, class: "nav-link#{" active" if controller.controller_name == "top" && action_name == "index"}" %>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= "active" if controller.controller_name == "news" %>" href="<%= news_index_path %>" <%= 'aria-current="page"' if controller.controller_name == "news" %>>お知らせ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= "active" if controller.controller_name == "products" %>" href="<%= products_path %>" <%= 'aria-current="page"' if controller.controller_name == "products" %>>製品情報</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= "active" if controller.controller_name == "contacts" %>" href="<%= new_contact_path %>" <%= 'aria-current="page"' if controller.controller_name == "contacts" %>>お問い合わせ</a>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "プロフィール", edit_user_registration_path, class: "nav-link#{" active" if controller.controller_name == "registrations" && action_name == "edit"}" %>
+                </li>
+            </ul>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-success" %>
+        </div>
+    </div>
+</nav>
+<%
+=begin%>
 <header>
     <% if user_signed_in? %>
     <li>
@@ -15,3 +45,5 @@
     </li>
     <% end %>
 </header>
+<%
+=end%>
