@@ -1,2 +1,81 @@
-<h1>Admin::Top#index</h1>
-<p>Find me in app/views/admin/top/index.html.erb</p>
+<div class="row my-4">
+    <div class="col-12">
+        <div id="carouselExampleIndicators" class="carousel slide shadow">
+            <div class="carousel-indicators">
+                <% @carousels.each_with_index do |carousel, index| %>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" 
+                    aria-label="Slide <%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == 0 %>">
+                </button>
+                <% end %>
+            </div>
+            <div class="carousel-inner">
+                <% @carousels.each_with_index do |carousel, index| %>
+                <div class="carousel-item <%= 'active' if index == 0 %>">
+                    <%= link_to admin_medium_path(carousel) do %>
+                        <%= image_tag carousel.image, class: "d-block w-100", alt: carousel.alt %>
+                    <% end %>
+                </div>
+                <% end %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="card text-bg-primary mb-2">
+                    <div class="card-body p-2">
+                        <span class="d-block text-center">PICK UP</span>
+                    </div>
+                </div>
+                <% @pick_ups.each do |pick_up| %>
+                <div class="card text-bg-light mb-2">
+                    <div class="card-body">
+                        <%= link_to admin_medium_path(pick_up) do %>
+                            <%= image_tag pick_up.image, class: "d-block w-100 h-auto", alt: pick_up.alt %>
+                        <% end %>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="card text-bg-success mb-2">
+                    <div class="card-body p-2">
+                        <span class="d-block">お知らせ</span>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <% @news.each do |list| %>
+                        <p class="mb-1"><%= l list.release_date, format: :long %></p>
+                        <p class="ms-4 mb-4">
+                            <%= link_to admin_news_path(list) do %>
+                                <%= list.title %>
+                                <% if list.link_flg == NewsConstants::LINK_FLG_ON %>
+                                <%= render "shared/blank" %>
+                                <% end %>
+                            <% end %>
+                        </p>
+                        <% end %>
+                        <%= link_to admin_news_index_path, class: "float-end" do %>
+                            <p>過去のお知らせを見る</p>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
