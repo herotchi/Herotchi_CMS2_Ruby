@@ -28,6 +28,13 @@ class News < ApplicationRecord
 
   scope :released, -> { where(release_flg: NewsConstants::RELEASE_FLG_ON).where("release_date <= ?", Date.today).order(release_date: :desc) }
 
+  scope :top_news, -> {
+    where("release_date <= ?", Date.today)
+      .where(release_flg: NewsConstants::RELEASE_FLG_ON)
+      .order(release_date: :desc, id: :desc)
+      .limit(NewsConstants::TOP_LIST_LIMIT)
+  }
+
   def self.ransackable_attributes(auth_object = nil)
      %w[title link_flg release_date release_flg]
   end

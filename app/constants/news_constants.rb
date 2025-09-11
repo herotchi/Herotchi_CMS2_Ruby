@@ -24,4 +24,5 @@ module NewsConstants
 
   ADMIN_PAGENATE_LIST_LIMIT = 2
   PAGENATE_LIST_LIMIT = 2
+  TOP_LIST_LIMIT = 10
 end

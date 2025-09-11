@@ -18,6 +18,18 @@ class Medium < ApplicationRecord
     presence: true,
     inclusion: { in: MediaConstants::RELEASE_FLG_LIST.keys, allow_blank: true }
 
+  scope :carousels, -> {
+    where(media_flg: MediaConstants::MEDIA_FLG_CAROUSEL,
+          release_flg: MediaConstants::RELEASE_FLG_ON)
+      .order(id: :desc)
+  }
+
+  scope :pick_ups, -> {
+    where(media_flg: MediaConstants::MEDIA_FLG_PICKUP,
+          release_flg: MediaConstants::RELEASE_FLG_ON)
+      .order(id: :desc)
+  }
+
   def self.ransackable_attributes(auth_object = nil)
      %w[media_flg alt release_flg]
   end
