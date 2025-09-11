@@ -4,14 +4,15 @@
             <div class="carousel-indicators">
                 <% @carousels.each_with_index do |carousel, index| %>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" 
-                    aria-label="Slide <%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == 0 %>"></button>
+                    aria-label="Slide <%= index %>" class="<%= 'active' if index == 0 %>" aria-current="<%= 'true' if index == 0 %>">
+                </button>
                 <% end %>
             </div>
             <div class="carousel-inner">
                 <% @carousels.each_with_index do |carousel, index| %>
                 <div class="carousel-item <%= 'active' if index == 0 %>">
                     <%= link_to carousel.url do %>
-                    <%= image_tag carousel.image, class: "d-block w-100", alt: carousel.alt %>
+                        <%= image_tag carousel.image, class: "d-block w-100", alt: carousel.alt %>
                     <% end %>
                 </div>
                 <% end %>
@@ -39,9 +40,9 @@
                 <% @pick_ups.each do |pick_up| %>
                 <div class="card text-bg-light mb-2">
                     <div class="card-body">
-                    <%= link_to pick_up.url do %>
-                        <%= image_tag pick_up.image, class: "d-block w-100 h-auto", alt: pick_up.alt %>
-                    <% end %>
+                        <%= link_to pick_up.url do %>
+                            <%= image_tag pick_up.image, class: "d-block w-100 h-auto", alt: pick_up.alt %>
+                        <% end %>
                     </div>
                 </div>
                 <% end %>
