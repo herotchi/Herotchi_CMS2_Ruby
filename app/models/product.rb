@@ -119,6 +119,10 @@ class Product < ApplicationRecord
     products
   end
 
+  scope :released, -> {
+    where(release_flg: NewsConstants::RELEASE_FLG_ON)
+  }
+
   private
     def new_product_news
       News.create!(
