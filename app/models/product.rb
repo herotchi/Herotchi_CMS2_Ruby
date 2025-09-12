@@ -115,7 +115,7 @@ class Product < ApplicationRecord
     products = products.by_first_category(params[:first_category_id])
     products = products.by_second_category(params[:second_category_id])
     products = products.by_keyword(params[:keyword])
-    products = products.by_release_flg(params[:release_flg])
+    products = products.by_release_flg(ProductConstants::RELEASE_FLG_ON)
     products
   end
 
