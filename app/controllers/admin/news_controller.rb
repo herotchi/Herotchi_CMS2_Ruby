@@ -5,7 +5,7 @@ class Admin::NewsController < Admin::ApplicationController
   def index
     # @news = News.all
     @q = News.ransack(params[:q])
-    @news = @q.result.page(params[:page]).per(NewsConstants::ADMIN_PAGENATE_LIST_LIMIT)
+    @news = @q.result.page(params[:page]).order(release_date: :desc, id: :desc).per(NewsConstants::ADMIN_PAGENATE_LIST_LIMIT)
   end
 
   # GET /admin/news/1 or /admin/news/1.json
@@ -27,7 +27,7 @@ class Admin::NewsController < Admin::ApplicationController
 
     respond_to do |format|
       if @news.save
-        format.html { redirect_to [:admin, @news], notice: t("flash.actions.create.success", resource: News.model_name.human) }
+        format.html { redirect_to [ :admin, @news ], notice: t("flash.actions.create.success", resource: News.model_name.human) }
         format.json { render :show, status: :created, location: @news }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Admin::NewsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to [:admin, @news], notice: t("flash.actions.update.success", resource: News.model_name.human) }
+        format.html { redirect_to [ :admin, @news ], notice: t("flash.actions.update.success", resource: News.model_name.human) }
         format.json { render :show, status: :ok, location: @news }
       else
         format.html { render :edit, status: :unprocessable_entity }
