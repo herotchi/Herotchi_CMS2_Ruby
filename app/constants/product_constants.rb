@@ -11,6 +11,9 @@ module ProductConstants
     RELEASE_FLG_OFF => "非表示"
   }.freeze
 
+  PRODUCT_NEWS_INSERT_MESSAGE = "が製品情報に追加されました。"
+  PRODUCT_NEWS_UPDATE_MESSAGE = "の製品情報が更新されました。"
+
   ADMIN_PAGENATE_LIST_LIMIT = 2
   PAGENATE_LIST_LIMIT = 2
 end

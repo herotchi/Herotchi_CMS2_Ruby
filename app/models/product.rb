@@ -1,10 +1,14 @@
 class Product < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   belongs_to :first_category
   belongs_to :second_category
   has_many :product_tags, dependent: :destroy
   has_many :tags, through: :product_tags
 
   has_one_attached :image
+
+  after_create :create_related_news
 
   validates :first_category_id,
     presence: true
@@ -113,4 +117,15 @@ class Product < ApplicationRecord
     products = products.by_release_flg(params[:release_flg])
     products
   end
+
+  private
+    def create_related_news
+      News.create!(
+        title:        self.name + ProductConstants::PRODUCT_NEWS_INSERT_MESSAGE,
+        link_flg:     NewsConstants::LINK_FLG_ON,
+        url:          Rails.application.routes.url_helpers.product_path(self),
+        release_flg:  NewsConstants::RELEASE_FLG_OFF,
+        release_date: Date.current
+      )
+    end
 end
