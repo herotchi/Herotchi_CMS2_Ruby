@@ -8,7 +8,8 @@ class Product < ApplicationRecord
 
   has_one_attached :image
 
-  after_create :create_related_news
+  after_create :new_product_news
+  after_update :update_product_news
 
   validates :first_category_id,
     presence: true
@@ -119,9 +120,19 @@ class Product < ApplicationRecord
   end
 
   private
-    def create_related_news
+    def new_product_news
       News.create!(
         title:        self.name + ProductConstants::PRODUCT_NEWS_INSERT_MESSAGE,
+        link_flg:     NewsConstants::LINK_FLG_ON,
+        url:          Rails.application.routes.url_helpers.product_path(self),
+        release_flg:  NewsConstants::RELEASE_FLG_OFF,
+        release_date: Date.current
+      )
+    end
+
+    def update_product_news
+      News.create!(
+        title:        self.name + ProductConstants::PRODUCT_NEWS_UPDATE_MESSAGE,
         link_flg:     NewsConstants::LINK_FLG_ON,
         url:          Rails.application.routes.url_helpers.product_path(self),
         release_flg:  NewsConstants::RELEASE_FLG_OFF,
