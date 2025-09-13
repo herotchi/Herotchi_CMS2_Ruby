@@ -1,0 +1,15 @@
+<footer class="my-1 pt-4 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2025− へろっちシマウマ～ず</p>
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <%= link_to terms_of_use_path, target: "_blank", rel: "noopener noreferrer" do %>
+            利用規約<%= render "shared/blank" %>
+            <% end %>
+        </li>
+        <li class="list-inline-item">
+            <%= link_to privacy_policy_path, target: "_blank", rel: "noopener noreferrer" do %>
+            プライバシーポリシー<%= render "shared/blank" %>
+            <% end %>
+        </li>
+    </ul>
+</footer>

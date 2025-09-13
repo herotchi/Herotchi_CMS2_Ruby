@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       get "complete"
     end
   end
+  get "terms_of_use",   to: "top#terms_of_use",   as: :terms_of_use
+  get "privacy_policy", to: "top#privacy_policy", as: :privacy_policy
 
   namespace :admin do
     root "top#index"
