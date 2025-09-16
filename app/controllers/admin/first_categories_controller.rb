@@ -27,7 +27,7 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
 
     respond_to do |format|
       if @first_category.save
-        format.html { redirect_to [:admin, @first_category], notice: t("flash.actions.create.success", resource: FirstCategory.model_name.human) }
+        format.html { redirect_to [ :admin, @first_category ], notice: t("flash.actions.create.success", resource: FirstCategory.model_name.human) }
         format.json { render :show, status: :created, location: @first_category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @first_category.update(first_category_params)
-        format.html { redirect_to [:admin, @first_category], notice: t("flash.actions.update.success", resource: FirstCategory.model_name.human) }
+        format.html { redirect_to [ :admin, @first_category ], notice: t("flash.actions.update.success", resource: FirstCategory.model_name.human) }
         format.json { render :show, status: :ok, location: @first_category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,11 +51,15 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
 
   # DELETE /admin/first_categories/1 or /admin/first_categories/1.json
   def destroy
-    @first_category.destroy!
+    if @first_category.second_categories.exists? || @first_category.products.exists?
+      redirect_to admin_first_category_path(@first_category), alert: "中カテゴリや製品情報が紐づいているため削除できません。"
+    else
+      @first_category.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to admin_first_categories_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: FirstCategory.model_name.human) }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to admin_first_categories_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: FirstCategory.model_name.human) }
+        format.json { head :no_content }
+      end
     end
   end
 
