@@ -27,7 +27,7 @@ class Admin::SecondCategoriesController < Admin::ApplicationController
 
     respond_to do |format|
       if @second_category.save
-        format.html { redirect_to [:admin, @second_category], notice: t("flash.actions.create.success", resource: SecondCategory.model_name.human) }
+        format.html { redirect_to [ :admin, @second_category ], notice: t("flash.actions.create.success", resource: SecondCategory.model_name.human) }
         format.json { render :show, status: :created, location: @second_category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Admin::SecondCategoriesController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @second_category.update(second_category_params)
-        format.html { redirect_to [:admin, @second_category], notice: t("flash.actions.update.success", resource: SecondCategory.model_name.human) }
+        format.html { redirect_to [ :admin, @second_category ], notice: t("flash.actions.update.success", resource: SecondCategory.model_name.human) }
         format.json { render :show, status: :ok, location: @second_category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,11 +51,15 @@ class Admin::SecondCategoriesController < Admin::ApplicationController
 
   # DELETE /admin/second_categories/1 or /admin/second_categories/1.json
   def destroy
-    @second_category.destroy!
+    if @second_category.products.exists?
+      redirect_to admin_second_category_path(@second_category), alert: "製品情報が紐づいているため削除できません。"
+    else
+      @second_category.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to admin_second_categories_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: SecondCategory.model_name.human) }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to admin_second_categories_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: SecondCategory.model_name.human) }
+        format.json { head :no_content }
+      end
     end
   end
 
