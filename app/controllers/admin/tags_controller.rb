@@ -27,7 +27,7 @@ class Admin::TagsController < Admin::ApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to [:admin, @tag], notice: t("flash.actions.create.success", resource: Tag.model_name.human) }
+        format.html { redirect_to [ :admin, @tag ], notice: t("flash.actions.create.success", resource: Tag.model_name.human) }
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Admin::TagsController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to [:admin, @tag], notice: t("flash.actions.update.success", resource: Tag.model_name.human) }
+        format.html { redirect_to [ :admin, @tag ], notice: t("flash.actions.update.success", resource: Tag.model_name.human) }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,11 +51,15 @@ class Admin::TagsController < Admin::ApplicationController
 
   # DELETE /admin/tags/1 or /admin/tags/1.json
   def destroy
-    @tag.destroy!
+    if @tag.products.exists?
+      redirect_to admin_tag_path(@tag), alert: "製品情報が紐づいているため削除できません。"
+    else
+      @tag.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to admin_tags_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: Tag.model_name.human) }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to admin_tags_path, status: :see_other, notice: t("flash.actions.destroy.success", resource: Tag.model_name.human) }
+        format.json { head :no_content }
+      end
     end
   end
 
