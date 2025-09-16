@@ -50,9 +50,16 @@
     <% if devise_mapping.rememberable? %>
     <div class="col-12">
         <div class="form-check">
-            <%= f.check_box :user_policy, class: "shadow-sm form-check-input text-center#{' is-invalid' if f.object.errors[:user_policy].any?}" %>
+            <%= f.check_box :user_policy,
+                { 
+                    class: "shadow-sm form-check-input text-center#{' is-invalid' if f.object.errors[:user_policy].any?}",
+                    required: true,
+                    disabled: f.object.user_policy.blank? # old('user_policy') が無い場合に disabled
+                },
+                "yes"  # チェック時の送信値
+            %>
             <%= f.label :user_policy, class: "form-check-label" do %>
-            <span class="text-info text-decoration-underline">利用規約</span>に同意する
+            <span class="text-info text-decoration-underline" data-bs-toggle="modal" data-bs-target="#user_policy_modal">利用規約</span>に同意する
             <% end %>
             <% if f.object.errors[:user_policy].any? %>
             <div class="invalid-feedback"><%= f.object.errors.full_messages_for(:user_policy).first %></div>
@@ -71,3 +78,23 @@
 
 </div>
 <% end %>
+<!-- モーダルの設定 -->
+<div class="modal fade" id="user_policy_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="user_policy_modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content text-start">
+            <div class="modal-body">
+                <%= render "layouts/terms_of_use" %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    onclick="userPolicy()">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function userPolicy() {
+        document.querySelector('input[name="user[user_policy]"]').removeAttribute('disabled');
+    }
+</script>
