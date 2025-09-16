@@ -13,7 +13,9 @@
             <%= link_to "編集", edit_admin_first_category_path(first_category), class: "btn btn-primary w-50", role: "button" %>
             <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
             <!-- Button trigger modal -->
+            <% unless first_category.second_categories.exists? || first_category.products.exists? %>
             <button type="button" class="btn btn-outline-danger float-end" data-bs-toggle="modal" data-bs-target="#destroyModal">削除</button>
+            <% end %>
         </div>
     </div>
 </div>
