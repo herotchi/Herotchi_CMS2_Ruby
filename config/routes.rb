@@ -29,7 +29,11 @@ Rails.application.routes.draw do
     resources :first_categories
     resources :second_categories
     resources :tags
-    resources :products
+    resources :products do
+      collection do
+        delete :bulk_destroy
+      end
+    end
     resources :media
     resources :contacts, only: [ :index, :show, :update ]
   end

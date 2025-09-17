@@ -12,27 +12,84 @@
 </div>
 
 <div class="card shadow mb-4">
-    <div class="card-header text-end">
-        <%= render 'kaminari/bootstrap-5/number', collection: @products %>
-    </div>
-    <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">大カテゴリ名</th>
-                    <th>中カテゴリ名</th>
-                    <th>製品名</th>
-                    <th>表示設定</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @products.each do |product| %>
-                <%= render "index_product", product: product %>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-    <div class="card-footer">
-        <%= paginate @products, theme: "bootstrap-5" %>
+    <%= form_with url: bulk_destroy_admin_products_path, method: :delete,  id: "productBatchDestroy" do %>
+        <div class="card-header">
+            <div class="d-inline-flex">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger float-end" data-bs-toggle="modal" data-bs-target="#destroyModal">一括削除</button>
+            </div>
+            <div class="d-inline-flex float-end pt-1">
+                <%= render 'kaminari/bootstrap-5/number', collection: @products %>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="all_checked" onclick="checkAll();">
+                            </div>
+                        </th>
+                        <th>大カテゴリ名</th>
+                        <th>中カテゴリ名</th>
+                        <th>製品名</th>
+                        <th>表示設定</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @products.each do |product| %>
+                    <%= render "index_product", product: product %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <%= paginate @products, theme: "bootstrap-5" %>
+        </div>
+    <% end %>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="destroyModal" tabindex="-1" aria-labelledby="destroyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="destroyModalLabel">製品情報一括削除</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <span>※製品情報を一括削除します。よろしいですか？</span>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger w-50" onclick="batchDestroy();">一括削除する</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    // 全製品情報削除チェックボックスが操作されたとき
+    function checkAll() {
+        const allCheckbox = document.getElementById("all_checked");
+        const deleteCheckboxes = document.getElementsByName("product_ids[]");
+        if (allCheckbox.checked) {
+            for (var i = 0; i < deleteCheckboxes.length; i++) {
+                deleteCheckboxes[i].checked = true;
+            }
+        } else {
+            for (var i = 0; i < deleteCheckboxes.length; i++) {
+                deleteCheckboxes[i].checked = false;
+            }
+        }
+    }
+
+    // 確認モーダルのボタンからsubmitを実行する
+    function batchDestroy() {
+        const form = document.getElementById('productBatchDestroy');
+        const button = event.target; // クリックされたボタン
+        if (form) {
+            button.disabled = true; // ボタンを無効化
+            form.submit();
+        }
+    }
+</script>

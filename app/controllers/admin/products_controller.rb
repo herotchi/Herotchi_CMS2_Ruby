@@ -63,6 +63,22 @@ class Admin::ProductsController < Admin::ApplicationController
     end
   end
 
+  def bulk_destroy
+    if params[:product_ids].present?
+      begin
+        Product.transaction do
+          Product.where(id: params[:product_ids]).find_each(&:destroy!)
+        end
+        redirect_to admin_products_path, notice: "選択した製品情報を削除しました。"
+      rescue => e
+        Rails.logger.error("一括削除エラー: #{e.class} - #{e.message}")
+        redirect_to admin_products_path, alert: "削除処理中にエラーが発生したため、削除は行われませんでした。"
+      end
+    else
+      redirect_to admin_products_path, alert: "削除する製品情報を選択してください。"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
