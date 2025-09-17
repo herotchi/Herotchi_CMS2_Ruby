@@ -1,3 +1,5 @@
+require "csv"
+
 class Admin::FirstCategoriesController < Admin::ApplicationController
   before_action :set_first_category, only: %i[ show edit update destroy ]
 
@@ -61,6 +63,54 @@ class Admin::FirstCategoriesController < Admin::ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+
+  def csv_upload
+  end
+
+  def csv_import
+    uploaded_file = params[:csv_file]
+    if uploaded_file.blank?
+      redirect_to csv_upload_admin_first_categories_path, alert: "CSVファイルを選択してください" and return
+    end
+
+    invalid_rows  = []
+    valid_records = []
+    names_seen = Set.new
+
+    begin
+      # --- 検証フェーズ ---
+      CSV.foreach(uploaded_file.tempfile.path, headers: true, encoding: "SJIS:UTF-8").with_index(2) do |row, line|
+        name = row["大カテゴリ名"].to_s.strip
+        # ファイル内で重複している場合はエラー扱い
+        if names_seen.include?(name)
+          invalid_rows << { line: line, errors: "CSVファイル内で重複している大カテゴリ名があります" }
+        end
+
+        names_seen.add(name)
+
+        record = FirstCategory.new(name: name)
+        if record.valid?
+          valid_records << record
+        else
+          invalid_rows << { line: line, errors: record.errors.full_messages.first }
+        end
+      end
+    rescue Encoding::UndefinedConversionError, Encoding::InvalidByteSequenceError => _
+      # 文字コードが違う場合のエラーをキャッチ
+      redirect_to csv_upload_admin_first_categories_path, alert: "CSVファイルの文字コードがシフトJISではありません" and return
+    end
+
+    if invalid_rows.any?
+      # エラーがあれば再表示
+      flash.now[:alert] = "エラーがあります。修正して再アップロードしてください"
+      @errors = invalid_rows
+      render :csv_upload and return
+    end
+
+    # --- バルクINSERT ---
+    FirstCategory.import valid_records   # activerecord-import
+    redirect_to admin_first_categories_path, notice: "大カテゴリを#{valid_records.size}件登録しました"
   end
 
   private

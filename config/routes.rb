@@ -26,7 +26,12 @@ Rails.application.routes.draw do
         registrations:  "admin/managers/registrations"
     }
     resources :news
-    resources :first_categories
+    resources :first_categories do
+      collection do
+        get  :csv_upload
+        post :csv_import
+      end
+    end
     resources :second_categories
     resources :tags
     resources :products do
