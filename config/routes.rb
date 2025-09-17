@@ -33,7 +33,12 @@ Rails.application.routes.draw do
       end
     end
     resources :second_categories
-    resources :tags
+    resources :tags do
+      collection do
+        get  :csv_upload
+        post :csv_import
+      end
+    end
     resources :products do
       collection do
         delete :bulk_destroy
