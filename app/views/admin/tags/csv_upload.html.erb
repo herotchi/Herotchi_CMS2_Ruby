@@ -1,0 +1,41 @@
+<% content_for :title, "タグCSV登録" %>
+<nav aria-label="パンくずリスト">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to "TOP", admin_root_path %></li>
+        <li class="breadcrumb-item active" aria-current="page">タグCSV登録</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <%= form_with url: csv_import_admin_tags_path, local: true, multipart: true do |f| %>
+        <div class="card-header">タグCSV登録</div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label>
+                        <%= link_to "CSVテンプレートをダウンロード", "/format/tag.csv", download: "タグCSV登録フォーマット.csv" %>
+                    </label>
+                </div>
+                <div class="col-md-12">
+                    <%= render 'shared/form_label', form: f, attribute: :csv_file, label: "CSVファイル（シフトJIS）", required: true %>
+                    <%= f.file_field :csv_file, accept: ".csv", class: "form-control" %>
+                    <% if @errors.present? %>
+                    <ul>
+                        <% @errors.each do |err| %>
+                        <li style="color: red"><%= err[:line] %> 行目: <%= err[:errors] %></li>
+                        <% end %>
+                    </ul>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-12 text-center my-2">
+                    <%= f.submit "インポート", class: "btn btn-primary w-50" %>
+                    <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
