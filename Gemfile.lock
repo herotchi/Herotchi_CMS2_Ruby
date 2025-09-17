@@ -59,6 +59,8 @@ GEM
       activemodel (= 8.0.2)
       activesupport (= 8.0.2)
       timeout (>= 0.4.0)
+    activerecord-import (2.2.0)
+      activerecord (>= 4.2)
     activestorage (8.0.2)
       actionpack (= 8.0.2)
       activejob (= 8.0.2)
@@ -466,6 +468,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_storage_validations
+  activerecord-import
   bootsnap
   bootstrap (~> 5.3.3)
   bootstrap5-kaminari-views

@@ -80,3 +80,5 @@ gem "kaminari"
 gem "bootstrap5-kaminari-views"
 
 gem "active_storage_validations"
+
+gem "activerecord-import"
