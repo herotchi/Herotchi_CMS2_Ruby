@@ -34,6 +34,7 @@
         <div class="col-12 text-center my-2">
             <%= form.submit "検索", class: "btn btn-primary w-50" %>
             <%= link_to "戻る", admin_root_path, class: "btn btn-secondary", role: "button" %>
+            <%= form.button "CSVダウンロード", type: :submit, name: "csv_export", value: "csv_export", class: "btn btn-success float-end" %>
         </div>
     </div>
 </div>

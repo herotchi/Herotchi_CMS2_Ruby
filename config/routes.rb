@@ -50,7 +50,11 @@ Rails.application.routes.draw do
       end
     end
     resources :media
-    resources :contacts, only: [ :index, :show, :update ]
+    resources :contacts, only: [ :index, :show, :update ] do
+      collection do
+        get :csv_export
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
