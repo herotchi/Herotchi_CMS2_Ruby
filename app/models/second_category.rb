@@ -6,6 +6,7 @@ class SecondCategory < ApplicationRecord
     presence: true
   validates :name,
     presence: true,
+    length: { maximum: SecondCategoryConstants::NAME_LENGTH_MAX, allow_blank: true },
     uniqueness: { scope: :first_category_id, allow_blank: true }
 
   def self.ransackable_attributes(auth_object = nil)
