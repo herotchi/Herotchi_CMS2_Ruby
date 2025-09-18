@@ -24,18 +24,10 @@
                     <ul class="dropdown-menu">
                         <li><%= link_to "大カテゴリ登録", new_admin_first_category_path, class: "dropdown-item#{" active" if controller.controller_name == "first_categories" && action_name == "new"}" %></li>
                         <li><%= link_to "大カテゴリ一覧", admin_first_categories_path, class: "dropdown-item#{" active" if controller.controller_name == "first_categories" && action_name == "index"}" %></li>
-<%
-=begin %>
-<li><a class="dropdown-item" href="{{ route('admin.first_category.csv_upload') }}">大カテゴリCSV登録</a></li>
-<%
-=end %>
+                        <li><%= link_to "大カテゴリCSV登録", csv_upload_admin_first_categories_path, class: "dropdown-item#{" active" if controller.controller_name == "first_categories" && action_name == "csv_upload"}" %></li>
                         <li><%= link_to "中カテゴリ登録", new_admin_second_category_path, class: "dropdown-item#{" active" if controller.controller_name == "second_categories" && action_name == "new"}" %></li>
                         <li><%= link_to "中カテゴリ一覧", admin_second_categories_path, class: "dropdown-item#{" active" if controller.controller_name == "second_categories" && action_name == "index"}" %></li>
-<%
-=begin %>
-<li><a class="dropdown-item" href="{{ route('admin.second_category.csv_upload') }}">中カテゴリCSV登録</a></li>
-<%
-=end %>
+                        <li><%= link_to "中カテゴリCSV登録", csv_upload_admin_second_categories_path, class: "dropdown-item#{" active" if controller.controller_name == "second_categories" && action_name == "csv_upload"}" %></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -44,11 +36,7 @@
                     <ul class="dropdown-menu">
                         <li><%= link_to "タグ登録", new_admin_tag_path, class: "dropdown-item#{" active" if controller.controller_name == "tags" && action_name == "new"}" %></li>
                         <li><%= link_to "タグ一覧", admin_tags_path, class: "dropdown-item#{" active" if controller.controller_name == "tags" && action_name == "index"}" %></li>
-<%
-=begin %>
-<li><a class="dropdown-item" href="{{ route('admin.tag.csv_upload') }}">タグCSV登録</a></li>
-<%
-=end %>
+                        <li><%= link_to "タグCSV登録", csv_upload_admin_tags_path, class: "dropdown-item#{" active" if controller.controller_name == "tags" && action_name == "csv_upload"}" %></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
