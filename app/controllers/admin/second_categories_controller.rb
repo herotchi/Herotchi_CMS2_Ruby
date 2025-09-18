@@ -63,6 +63,69 @@ class Admin::SecondCategoriesController < Admin::ApplicationController
     end
   end
 
+  def csv_upload
+  end
+
+  def csv_import
+    uploaded_file = params[:csv_file]
+    if uploaded_file.blank?
+      redirect_to csv_upload_admin_second_categories_path, alert: "CSVファイルを選択してください" and return
+    end
+
+    invalid_rows  = []
+    valid_records = []
+    names_seen = Set.new
+
+    begin
+      # --- 検証フェーズ ---
+      CSV.foreach(uploaded_file.tempfile.path, headers: true, encoding: "SJIS:UTF-8").with_index(2) do |row, line|
+        parent_name  = row["大カテゴリ名"].to_s.strip
+        child_name   = row["中カテゴリ名"].to_s.strip
+
+        # 親カテゴリが存在するか
+        parent = FirstCategory.find_by(name: parent_name)
+        if parent.nil?
+          invalid_rows << { line: line, errors: "大カテゴリ「#{parent_name}」が見つかりません" }
+          next
+        end
+
+        # ファイル内重複チェック
+        key = "#{parent.id}-#{child_name}"
+        if names_seen.include?(key)
+          invalid_rows << { line: line, errors: "同一ファイル内で中カテゴリ「#{child_name}」が重複しています" }
+          next
+        end
+        names_seen.add(key)
+
+        record = SecondCategory.new(
+          name: child_name,
+          first_category_id: parent.id
+        )
+
+        if record.valid?
+          valid_records << record
+        else
+          # 最初のエラーだけ格納
+          invalid_rows << { line: line, errors: record.errors.full_messages.first }
+        end
+      end
+    rescue Encoding::UndefinedConversionError, Encoding::InvalidByteSequenceError => _
+      # 文字コードが違う場合のエラーをキャッチ
+      redirect_to csv_upload_admin_second_categories_path, alert: "CSVファイルの文字コードがシフトJISではありません" and return
+    end
+
+    if invalid_rows.any?
+      # エラーがあれば再表示
+      flash.now[:alert] = "エラーがあります。修正して再アップロードしてください"
+      @errors = invalid_rows
+      render :csv_upload and return
+    end
+
+    # --- バルクINSERT ---
+    SecondCategory.import valid_records   # activerecord-import
+    redirect_to admin_second_categories_path, notice: "中カテゴリを#{valid_records.size}件登録しました"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_second_category

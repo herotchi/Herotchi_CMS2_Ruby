@@ -32,7 +32,12 @@ Rails.application.routes.draw do
         post :csv_import
       end
     end
-    resources :second_categories
+    resources :second_categories do
+      collection do
+        get  :csv_upload
+        post :csv_import
+      end
+    end
     resources :tags do
       collection do
         get  :csv_upload
