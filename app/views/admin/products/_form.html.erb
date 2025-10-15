@@ -91,20 +91,19 @@
     const firstSelect = document.getElementById('product_first_category_id');
     const secondSelect = document.getElementById('product_second_category_id');
 
-    // const secondCategories = {
-    //     {
-    //         Js::from(@second_categories)
-    //     }
-    // };
+    // Railsの変数をJSONに変換してJavaScriptに渡す
     const secondCategories = <%= raw((@second_categories || []).to_json) %>;
+    // 大カテゴリごとに振り分けた中カテゴリの配列
     const optionsByFirst = {};
 
     // 大カテゴリごとに紐づいている中カテゴリの配列を作成
     secondCategories.forEach(secondCategory => {
+        // 大カテゴリのキーを設定する
         if (!optionsByFirst[secondCategory.first_category_id]) {
             optionsByFirst[secondCategory.first_category_id] = [];
         }
 
+        // 同じ大カテゴリを持つ中カテゴリのデータを大カテゴリのキーごとに格納する
         optionsByFirst[secondCategory.first_category_id].push({
             value: secondCategory.id,
             text: secondCategory.name
@@ -116,19 +115,22 @@
         const firstOption = firstSelect.value;
         // 大カテゴリが選択されている場合
         if (firstOption) {
+            // 大カテゴリのキーから中カテゴリの選択肢群を指定する
             const secondOptions = optionsByFirst[firstOption] || [];
-
+            // 中カテゴリのプルダウンを初期化
             secondSelect.innerHTML = '';
-
+            // デフォルトの選択肢を設定
             const newOption = document.createElement('option');
             newOption.value = '';
             newOption.text = '---';
             secondSelect.appendChild(newOption);
 
+            // 中カテゴリの選択肢群をプルダウンに追加していく
             secondOptions.forEach(item => {
                 const newOption = document.createElement('option');
                 newOption.value = item.value;
                 newOption.text = item.text;
+                // もし中カテゴリを選択していたならその中カテゴリを選択済みにする
                 if ("<%= @product.second_category_id %>" == item.value) {
                     newOption.setAttribute('selected', 'selected');
                 }
@@ -145,7 +147,7 @@
         }
     });
 
-    // 大カテゴリが選択された場合、それに紐づいた中カテゴリのプルダウンを用意する
+    // 大カテゴリが変更された場合、それに紐づいた中カテゴリのプルダウンを用意する
     firstSelect.addEventListener('change', function() {
         const firstOption = firstSelect.value;
 
